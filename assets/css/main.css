@@ -10,7 +10,11 @@
         font-size: 16px;
     }
 
-    .font-title {
+    .lilita {
         font-family: 'Lilita One', cursive;
+    }
+
+    button {
+        color: #fff !important;
     }
 }

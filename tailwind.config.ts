@@ -13,5 +13,16 @@ module.exports = {
   plugins: [
     require("daisyui")
   ],
+  daisyui: {
+    themes: [
+      {
+        customtheme: {
+          "primary": "#30a185",
+          "secondary": "#307e6a",
+          "accent": "#18201e"
+        }
+      }
+    ]
+  }
 }
 
