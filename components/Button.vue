@@ -1,5 +1,5 @@
 <template>
-    <button class="btn btn-sm btn-primary text-xs px-10">{{props.content}}</button>
+    <button class="btn btn-sm btn-secondary text-xs px-10">{{props.content}}</button>
 </template>
 
 <script setup lang="ts">

@@ -8,18 +8,20 @@ module.exports = {
     "./app.vue",
   ],
   theme: {
-    extend: {},
+    extend: {
+      
+    },
   },
   plugins: [
-    require("daisyui")
+    require('@tailwindcss/typography'),require("daisyui")
   ],
   daisyui: {
     themes: [
       {
         customtheme: {
-          "primary": "#30a185",
-          "secondary": "#307e6a",
-          "accent": "#18201e"
+          "primary": "#96c2f8",
+          "secondary": "#659fe6",
+          "accent": "#3968a2"
         }
       }
     ]
