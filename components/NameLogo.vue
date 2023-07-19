@@ -1,3 +1,5 @@
 <template>
-    <a class="text-white text-center text-3xl lilita" href="">ZEFU</a>
+    <div class="text-center text-white text-3xl lilita">
+        ZEFU
+    </div>
 </template>

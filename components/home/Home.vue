@@ -1,5 +1,5 @@
 <template>
-     <div class="md:flex md:justify-center px-4 md:px-0 pt-10 md:pt-0">
+     <div class="md:flex md:justify-center px-4 md:px-0 pt-24 md:pt-14">
         <div class="md:w-4/5 md:flex justify-center">
             <div class="flex items-center">
                 <h1 class="text-black text-center">Aqui você encontra a caixa de utensílios.</h1>
