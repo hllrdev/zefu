@@ -1,6 +1,6 @@
 <template>
     <div>
-        <nav class="h-14 bg-neutral-focus px-6 grid grid-cols-3 md:flex justify-between items-center">
+        <nav class="h-14 bg-neutral-focus px-6 md:px-14 grid grid-cols-3 md:flex justify-between items-center">
             <label for="navbar-drawer" class="md:hidden">
                 <Icon name="material-symbols:menu" color="white" size="2rem" />
             </label>
