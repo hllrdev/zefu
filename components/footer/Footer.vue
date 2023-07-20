@@ -11,7 +11,7 @@
             </div>
         </div> 
         <div>
-            <p>Copyright © 2023 - All right reserved by Zefu</p>
+            <p>Desenvolvido com <Icon class="mb-1" name="ph:heart-fill" color="red" size="1.5rem"></Icon> por <strong>Héuller</strong></p>
         </div>
     </footer>
 </template>
