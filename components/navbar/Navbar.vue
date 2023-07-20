@@ -12,7 +12,7 @@
             <input id="navbar-drawer" type="checkbox" class="drawer-toggle"/>
             <div class="drawer-side z-50">
                 <label for="navbar-drawer" class="drawer-overlay"></label>
-                <NavbarMenuItems class="menu p-4 w-80 h-full bg-neutral-900" />
+                <NavbarMenuItems class="menu p-4 w-80 h-full bg-base-200" />
             </div>
         </div>
     </div>
