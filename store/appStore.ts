@@ -3,7 +3,12 @@ import { defineStore } from "pinia";
 
 export const useAppStore = defineStore('appStore', () => {
 
-    const alert = ref(false);
+    const alert = reactive({
+        show: false,
+        type: "",
+        message: "",
+        icon: ""
+    });
 
     return { alert }
 
