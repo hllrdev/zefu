@@ -1,5 +1,7 @@
 <template>
-    <div class="text-center text-white text-3xl lilita">
-        ZEFU
-    </div>
+    <RouterLink to="/">
+        <div class="text-3xl lilita">
+            ZEFU
+        </div>
+    </RouterLink>
 </template>

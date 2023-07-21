@@ -1,5 +1,7 @@
 <template>
-    <Home />
-    <Products />
-    <Group />
+    <NuxtLayout name="initial">
+        <Home />
+        <Products />
+        <Group />
+    </NuxtLayout>
 </template>

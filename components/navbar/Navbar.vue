@@ -5,8 +5,8 @@
                 <Icon name="material-symbols:menu" color="white" size="2rem" />
             </label>
             <NavbarMenuItems class="md:flex hidden gap-4" />
-            <RouterLink to="/"><NameLogo/></RouterLink>
-            <Button content="Entrar" class="hidden md:flex" />
+            <NameLogo class="text-white text-center"/>
+            <button class="btn btn-sm btn-secondary hidden md:flex text-xs px-10">Entrar</button>
         </nav>
         <div class="drawer">
             <input id="navbar-drawer" type="checkbox" class="drawer-toggle"/>

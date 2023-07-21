@@ -1,6 +1,7 @@
 <template>
     <footer class="footer footer-center p-10 bg-neutral-900 text-neutral-400">
         <div class="grid grid-flow-col gap-4">
+            <a class="link link-hover"><RouterLink to="/">Início</RouterLink></a> 
             <a class="link link-hover"><RouterLink to="products">Produtos</RouterLink></a> 
             <a class="link link-hover"><RouterLink to="macros">Macros</RouterLink></a>
         </div> 
