@@ -6,7 +6,9 @@
             </label>
             <NavbarMenuItems class="md:flex hidden gap-4" />
             <NameLogo class="text-white text-center"/>
-            <button class="btn btn-sm btn-secondary hidden md:flex text-xs px-10">Entrar</button>
+            <NuxtLink to="auth/login">
+                <button class="btn btn-sm btn-secondary hidden md:flex text-xs px-10">Entrar</button>
+            </NuxtLink>
         </nav>
         <div class="drawer">
             <input id="navbar-drawer" type="checkbox" class="drawer-toggle"/>

@@ -3,7 +3,11 @@
         <li v-for="item, i in items" :key="i" @click="closeDrawer()">
             <RouterLink :to="item.to">{{ item.route }}</RouterLink>
         </li>
-        <li class="md:hidden flex items-center mt-4"><Button class="btn-wide" content="Entrar" /></li>
+        <li class="md:hidden mt-4">
+            <NuxtLink to="auth/login"> 
+                <button class="btn btn-secondary btn-wide">Entrar</button>
+            </NuxtLink>
+        </li>
     </ul>
 </template>
 
