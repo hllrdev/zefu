@@ -23,8 +23,8 @@
             "to": "/products"
         },
         {
-            "route": "Macros",
-            "to": "/macros"
+            "route": "Calculadora",
+            "to": "/calculator"
         }
     ]
 

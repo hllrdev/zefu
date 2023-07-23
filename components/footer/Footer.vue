@@ -8,8 +8,8 @@
             </div> 
             <div>
                 <div class="grid grid-flow-col gap-4">
-                    <a href="https://www.instagram.com/perna.vermelha/"><Icon name="mdi:instagram" size="2rem"/></a>
-                    <a href=""><Icon name="ic:baseline-whatsapp" size="2rem"/></a>
+                    <a href="https://www.instagram.com/perna.vermelha/" target="_blank"><Icon name="mdi:instagram" size="2rem"/></a>
+                    <a href="https://chat.whatsapp.com/IKsrJ3xScsnApKY4eqQpeE" target="_blank"><Icon name="ic:baseline-whatsapp" size="2rem"/></a>
                 </div>
             </div> 
             <div>

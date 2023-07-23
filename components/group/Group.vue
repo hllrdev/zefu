@@ -9,7 +9,7 @@
                 </p>
             </div>
             <div class="flex justify-center">
-                <button class="btn btn-secondary btn-wide flex justify-around"> <span>Entrar agora</span> <Icon name="logos:whatsapp-icon" size="2rem" /> </button>
+                <a href="https://chat.whatsapp.com/IKsrJ3xScsnApKY4eqQpeE" target="_blank" class="btn btn-secondary btn-wide flex justify-around"> <span class="text-white">Entrar agora</span> <Icon name="logos:whatsapp-icon" size="2rem" /></a>
             </div>
         </div>
     </div>

@@ -1,5 +1,5 @@
 <template>
-    <div :class="appStore.alert.type" class="alert absolute flex top-16 left-0 right-0 mx-auto w-11/12 md:w-2/5 duration-300">
+    <div :class="appStore.alert.type" class="alert fixed flex top-16 left-0 right-0 mx-auto w-11/12 md:w-2/5 duration-300">
         <Icon :name="appStore.alert.icon" size="2rem" />
         <span>{{ appStore.alert.message }}</span>
     </div>
@@ -12,7 +12,6 @@
     const appStore = useAppStore();
 
     onUpdated(() => {
-        window.scrollTo({top: 0, behavior: 'smooth'});
         setTimeout(() => {
             appStore.alert.show = false;
             appStore.alert.icon = "";

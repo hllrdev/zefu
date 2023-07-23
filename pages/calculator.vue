@@ -3,7 +3,10 @@
         <NuxtLayout name="initial">
             <div class="pt-24 px-4 pb-10">
                 <Alert v-show="appStore.alert.show" />
-                <h1 class="text-center">Cálculo macronutrientes</h1>
+                <h1 class="text-center">Calculadora</h1>
+                <h2 class="text-center font-semibold uppercase text-sm">
+                    macros, taxa metabólica basal e gasto energético total
+                </h2>
                 <div class="flex justify-center">
                     <div class="md:w-4/5 lg:w-3/5">
                         <form action="" class="py-6">
@@ -28,52 +31,57 @@
                                 </div>
                             </div>
                         </form>
-                        <h2 class="text-center">Taxa metabólica basal (TMB)</h2>
-                        <p class="text-center py-4 text-lg"><span class="text-8xl font-bold">{{ tmb }}</span>kcal</p>
-                        <p class="text-neutral-500 text-justify">A taxa metabólica basal corresponde ao quanto de calorias
-                            você gasta apenas em repouso, sem contabilizar nenhuma atividade do seu dia.
-                        </p>
-                        <h2 class="text-center py-4">Gasto energético total (GET)</h2>
-                        <p class="text-neutral-500 pb-4 text-justify">O gasto energético total corresponde ao quanto de calorias
-                            você gasta somando a TMB + seu nível de atividade. Os níveis de atividade são apenas estimativas,
-                            sendo que a mensuração do esforço realizado é subjetivo.
-                        </p>
-                        <!-- table -->
-                        <div class="overflow-x-auto">
-                            <table class="table">
-                                <thead>
-                                    <tr class="text-neutral-900">
-                                        <th></th>
-                                        <th>Nível de atividade</th>
-                                        <th>Calorias</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th>1</th>
-                                        <td>Sedentário</td>
-                                        <td><span>{{ Math.round(tmb * 1.15) }}</span> kcal</td>
-                                    </tr>
-                                    <tr>
-                                        <th>2</th>
-                                        <td>Moderado</td>
-                                        <td><span>{{ Math.round(tmb * 1.3) }}</span> kcal</td>
-                                    </tr>
-                                    <tr>
-                                        <th>3</th>
-                                        <td>Alto</td>
-                                        <td><span>{{ Math.round(tmb * 1.5) }}</span> kcal</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div v-show="results">
+                            <h2 class="text-center">Taxa metabólica basal (TMB)</h2>
+                            <p class="text-center py-4 text-lg"><span class="text-8xl font-bold">{{ tmb }}</span>kcal</p>
+                            <p class="text-neutral-500 text-justify">A taxa metabólica basal corresponde ao quanto de calorias
+                                você gasta apenas em repouso, sem contabilizar nenhuma atividade do seu dia.
+                            </p>
+                            <h2 class="text-center py-4">Gasto energético total (GET)</h2>
+                            <p class="text-neutral-500 pb-4 text-justify">O gasto energético total corresponde ao quanto de calorias
+                                você gasta somando a TMB + seu nível de atividade. Os níveis de atividade são apenas estimativas,
+                                sendo que a mensuração do esforço realizado é subjetivo.
+                            </p>
+                            <!-- table -->
+                            <div class="overflow-x-auto">
+                                <table class="table">
+                                    <thead>
+                                        <tr class="text-neutral-900">
+                                            <th></th>
+                                            <th>Nível de atividade</th>
+                                            <th>Calorias</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th>1</th>
+                                            <td>Sedentário</td>
+                                            <td><span>{{ Math.round(tmb * 1.15) }}</span> kcal</td>
+                                        </tr>
+                                        <tr>
+                                            <th>2</th>
+                                            <td>Moderado</td>
+                                            <td><span>{{ Math.round(tmb * 1.3) }}</span> kcal</td>
+                                        </tr>
+                                        <tr>
+                                            <th>3</th>
+                                            <td>Alto</td>
+                                            <td><span>{{ Math.round(tmb * 1.5) }}</span> kcal</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
+                        
                         <h2 class="text-center py-4">Sugestão de macronutrientes</h2>
                         <p class="text-neutral-500 pb-4 text-justify">A sugestão de macros possui valores conservadores para
                             um início de dieta, conforme progressão deve-se atualizar a quantidade em especial 
-                            dos carboidratos.
+                            dos carboidratos. Ela leva em conta apenas o peso do indivíduo e seu objetivo. Dessa forma,
+                            você pode realizar a comparação com os valores indicados pela TMB e GET e ajustar caso ache
+                            necessário. (Para o cálculo da TMB e GET preencha os campos idade, altura e sexo, além do peso)
                         </p>
                         <h3 class="pb-2">Qual seu objetivo atualmente?</h3>
-                        <div class="flex flex-wrap justify-center gap-2 py-4">
+                        <div class="flex flex-wrap justify-center gap-2 pt-4 pb-8">
                             <input v-model="goal" class="btn w-full md:btn-wide" type="radio" value="cutting" aria-label="Perder gordura"/>
                             <input v-model="goal" class="btn w-full md:btn-wide" type="radio" value="maintenance" aria-label="Recomposição corporal/Manutenção" />
                             <input v-model="goal" class="btn w-full md:btn-wide" type="radio" value="bulking" aria-label="Ganhar massa" />
@@ -105,8 +113,11 @@
     const weight = ref();
     const sex = ref("");
 
+    const results = ref(false);
+
     const tmb = computed(() => {
         if(age.value && height.value && weight.value && sex.value){
+            results.value = true;
             if(sex.value == "MALE")
                 return Math.round(88.362 + (13.397 * weight.value) + (4.799 * height.value) - (5.677 * age.value));
             return Math.round(447.593 + (9.247 * weight.value) + (3.098 * height.value) - (4.33 * age.value));
