@@ -10,7 +10,7 @@
                 <div class="flex justify-center">
                     <div class="md:w-4/5 lg:w-3/5">
                         <form action="" class="py-6">
-                            <Input name="age" type="number" label="Qual a sua idade?" placeholder="Digite aqui sua idade" v-model="age" :value="age" @update:model-value="age = $event" />
+                            <Input name="age" type="number" label="Qual a sua idade?" placeholder="Digite aqui sua idade" v-model="age" @update:model-value="age = $event" />
                             <Input name="height" type="number" label="Qual a sua altura? (cm)" placeholder="Digite aqui sua altura" v-model="height" @update:model-value="height = $event" />
                             <Input id="weight" name="weight" type="number" label="Qual o seu peso?" placeholder="Digite aqui seu peso" v-model="weight" @update:model-value="weight = $event"/>
                             <div class="md:max-w-xs">
