@@ -27,21 +27,23 @@
     })
 
     const products = ref([1,2,3,4,5,6]);
-
     const loading = ref(false);
-    
-    function handleScroll() {
-        const limitScroll = document.body.offsetHeight - window.innerHeight;
-        const currentScrollPosition = window.scrollY;
 
-        if(limitScroll == currentScrollPosition){
-            loading.value = true;
-            setTimeout(function(){
-                products.value.push(...[7,8,9])
-                loading.value = false;
-            }, 3000)
+    const scrollControl = ref(0);
+
+    function handleScroll() {
+        var element = document.body;
+        if(window.innerHeight + window.scrollY >= element.clientHeight - 20){
+            const time = Date.now();
+            if((time > scrollControl.value + 1000 )|| (scrollControl.value == 0)){
+                scrollControl.value = time
+                loading.value = true;
+                    setTimeout(function(){
+                        products.value.push(...[7,8,9])
+                        loading.value = false;
+                    }, 3000)
+            }  
         }
-            
     }
 
 </script>

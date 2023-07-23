@@ -1,7 +1,7 @@
 <template>
     <ul class="text-white md:text-xs font-semibold pt-8 md:pt-0">
-        <li v-for="item, i in items" :key="i" @click="closeDrawer()">
-            <RouterLink :to="item.to">{{ item.route }}</RouterLink>
+        <li v-for="item, i in items" :key="i">
+            <NuxtLink :to="item.to">{{ item.route }}</NuxtLink>
         </li>
         <li class="md:hidden mt-4">
             <NuxtLink to="auth/login"> 
@@ -27,10 +27,6 @@
             "to": "/macros"
         }
     ]
-
-    function closeDrawer() {
-        window.screen.width < 768 ? document.getElementById("navbar-drawer")?.click() : null;
-    }
 
 </script>
 
