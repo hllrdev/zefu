@@ -4,15 +4,16 @@
             <div class="pt-24 px-4 pb-10">
                 <Alert v-show="appStore.alert.show" />
                 <h1 class="text-center">Calculadora</h1>
-                <h2 class="text-center font-semibold uppercase text-sm">
-                    macros, taxa metabólica basal e gasto energético total
+                <h2 class="text-center font-semibold uppercase text-sm pb-6">
+                    macros, taxa metabólica basal (tmb) e gasto energético total (get)
                 </h2>
                 <div class="flex justify-center">
                     <div class="md:w-4/5 lg:w-3/5">
-                        <form action="" class="py-6">
-                            <Input name="age" type="number" label="Qual a sua idade?" placeholder="Digite aqui sua idade" v-model="age" @update:model-value="age = $event" />
-                            <Input name="height" type="number" label="Qual a sua altura? (cm)" placeholder="Digite aqui sua altura" v-model="height" @update:model-value="height = $event" />
-                            <Input id="weight" name="weight" type="number" label="Qual o seu peso?" placeholder="Digite aqui seu peso" v-model="weight" @update:model-value="weight = $event"/>
+                        <h3>Para calcular a TMB e o GET preencha os campos a seguir.</h3>
+                        <form action="" class="py-4">
+                            <Input name="age" type="number" label="Qual a sua idade?" placeholder="Digite aqui sua idade" v-model="age" @update:model-value="age = $event" class="pb-2" />
+                            <Input name="height" type="number" label="Qual a sua altura? (cm)" placeholder="Digite aqui sua altura" v-model="height" @update:model-value="height = $event" class="pb-2" />
+                            <Input id="weight" name="weight" type="number" label="Qual o seu peso?" placeholder="Digite aqui seu peso" v-model="weight" @update:model-value="weight = $event" class="pb-2"/>
                             <div class="md:max-w-xs">
                                 <label class="label">
                                     <span class="label-text text-neutral-600">Qual o seu sexo?</span>
@@ -78,9 +79,9 @@
                             um início de dieta, conforme progressão deve-se atualizar a quantidade em especial 
                             dos carboidratos. Ela leva em conta apenas o peso do indivíduo e seu objetivo. Dessa forma,
                             você pode realizar a comparação com os valores indicados pela TMB e GET e ajustar caso ache
-                            necessário. (Para o cálculo da TMB e GET preencha os campos idade, altura e sexo, além do peso)
+                            necessário.
                         </p>
-                        <h3 class="pb-2">Qual seu objetivo atualmente?</h3>
+                        <h3 class="pb-2 font-semibold">Qual seu objetivo atualmente?</h3>
                         <div class="flex flex-wrap justify-center gap-2 pt-4 pb-8">
                             <input v-model="goal" class="btn w-full md:btn-wide" type="radio" value="cutting" aria-label="Perder gordura"/>
                             <input v-model="goal" class="btn w-full md:btn-wide" type="radio" value="maintenance" aria-label="Recomposição corporal/Manutenção" />
