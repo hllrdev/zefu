@@ -6,7 +6,7 @@
             </label>
             <NavbarMenuItems class="md:flex hidden gap-4" />
             <NameLogo class="text-white text-center"/>
-            <NuxtLink to="auth/login">
+            <NuxtLink to="/auth/login">
                 <button class="btn btn-sm btn-secondary hidden md:flex text-xs px-10">Entrar</button>
             </NuxtLink>
         </nav>

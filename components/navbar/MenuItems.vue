@@ -4,7 +4,7 @@
             <NuxtLink :to="item.to">{{ item.route }}</NuxtLink>
         </li>
         <li class="md:hidden mt-4">
-            <NuxtLink to="auth/login"> 
+            <NuxtLink to="/auth/login"> 
                 <button class="btn btn-secondary btn-wide">Entrar</button>
             </NuxtLink>
         </li>

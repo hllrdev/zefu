@@ -12,27 +12,31 @@
                         <Input name="password" type="password" label="Senha" placeholder="Digite aqui sua senha" @update:model-value="formData.password = $event"/>
                         <span class="text-error font-medium text-xs" v-if="v$.password.$error">{{ v$.password.$errors[0].$message }}</span>
                         <div class="text-end pb-4 pt-1">   
-                            <NuxtLink to="recovery"><span class="text-sm">Esqueceu sua senha?</span></NuxtLink>
+                            <NuxtLink to="/auth/recovery"><span class="text-sm">Esqueceu sua senha?</span></NuxtLink>
                         </div>
                     </div>
                     <div class="flex justify-center flex-col">
-                        <button type="button" class="btn w-full mb-4" @click="submitForm">Entrar</button>
+                        <button type="button" class="btn btn-accent w-full mb-4" @click="submitForm">Entrar</button>
                         <button class="btn btn-outline border-black">
                             <Icon name="flat-color-icons:google" size="1.25rem"></Icon> 
                             <span class="text-black">Entrar com Google</span>
                         </button>
                     </div>
                 </form>
-                <p class="text-sm text-center"> Ainda não possui uma conta? <NuxtLink to="signup"><span class="font-semibold ml-2">Cadastrar</span></NuxtLink></p>
+                <p class="text-sm text-center"> Ainda não possui uma conta? <NuxtLink to="/auth/signup"><span class="font-semibold ml-2">Cadastrar</span></NuxtLink></p>
             </div>
         </NuxtLayout>
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 
-    const submitForm= () => {
+    const submitForm= async () => {
         v$.value.$validate();
+        // if(!v$.value.$error){
+        //     const response = await useAsyncData('get', () => $fetch('http://localhost:8080/api'));
+        //     console.log(response.data.value);
+        // }
     }
 
     const formData = reactive({

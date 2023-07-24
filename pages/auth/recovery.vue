@@ -10,7 +10,7 @@
                     </div>
                     <button type="button" class="btn w-full" @click="submitForm">Recuperar</button>
                 </form>
-                <p class="text-sm text-center">Lembrou a senha? <NuxtLink to="login"><span class="font-semibold ml-2">Entrar</span></NuxtLink></p>
+                <p class="text-sm text-center">Lembrou a senha? <NuxtLink to="/auth/login"><span class="font-semibold ml-2">Entrar</span></NuxtLink></p>
             </div>
         </NuxtLayout>
     </div>

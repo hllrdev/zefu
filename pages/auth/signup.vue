@@ -22,7 +22,7 @@
                     </div>      
                     <button type="button" class="btn w-full" @click="submitForm">Cadastrar</button>
                 </form>
-                <p class="text-sm text-center">Já possui uma conta?<NuxtLink to="login"><span class="font-semibold ml-2">Entrar</span></NuxtLink></p>
+                <p class="text-sm text-center">Já possui uma conta?<NuxtLink to="/auth/login"><span class="font-semibold ml-2">Entrar</span></NuxtLink></p>
             </div>
         </NuxtLayout>
     </div>
@@ -30,15 +30,25 @@
 
 <script setup>
 
-    const submitForm= () => {
+    const submitForm = async () => {
         v$.value.$validate();
+        if(!v$.value.$error){
+            const response = await useAsyncData(() => $fetch('http://localhost:8080/api/auth/signup', {
+                method: 'POST',
+                body: JSON.stringify({
+                    "name": formData.name,
+                    "email": formData.email,
+                    "password": formData.password
+                })
+            }));
+        }
     }
 
     const formData = reactive({
-        name: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
+        name: 'Héuller',
+        email: 'heuller557@gmail.com',
+        password: '123456',
+        confirmPassword: '123456',
     });
 
     import { required, email, sameAs, minLength, helpers} from "@vuelidate/validators";
