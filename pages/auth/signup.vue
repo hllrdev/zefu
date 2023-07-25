@@ -28,25 +28,58 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+
+    import { useAppStore } from "~/store/appStore";
+
+    const appStore = useAppStore();
+
+    const router = useRouter();
 
     const submitForm = async () => {
         v$.value.$validate();
         if(!v$.value.$error){
-            const response = await useAsyncData(() => $fetch('http://localhost:8080/api/auth/signup', {
+            await useAsyncData(() => $fetch('http://localhost:8080/api/auth/signup', {
                 method: 'POST',
                 body: JSON.stringify({
                     "name": formData.name,
                     "email": formData.email,
                     "password": formData.password
                 })
-            }));
+            })
+            .then(() => {
+                appStore.alert.type = "alert-success";
+                appStore.alert.message = "Cadastro realizado com sucesso!";
+                appStore.alert.icon = "mdi:success-bold";
+                appStore.alert.show = true;
+                setTimeout(() => {
+                        router.push({
+                        path: "/auth/login"
+                    })
+                }, 3000)
+            })
+            .catch((error) => {
+
+                if(error.status == 409){
+                    appStore.alert.type = "alert-warning";
+                    appStore.alert.message = "E-mail já cadastrado, utilize outro.";
+                    appStore.alert.icon = "material-symbols:warning";
+                    appStore.alert.show = true;
+                }
+                else{
+                    appStore.alert.type = "alert-error";
+                    appStore.alert.message = "Houve um erro, tente novamente mais tarde.";
+                    appStore.alert.icon = "icon-park-solid:error";
+                    appStore.alert.show = true;
+                }
+            })
+            );
         }
     }
 
     const formData = reactive({
         name: 'Héuller',
-        email: 'heuller557@gmail.com',
+        email: 'heullr@gmail.com',
         password: '123456',
         confirmPassword: '123456',
     });

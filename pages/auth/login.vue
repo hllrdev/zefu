@@ -31,17 +31,55 @@
 
 <script setup lang="ts">
 
+    import { useAppStore } from "~/store/appStore";
+
+    const appStore = useAppStore();
+
+    const router = useRouter();
+
     const submitForm= async () => {
         v$.value.$validate();
-        // if(!v$.value.$error){
-        //     const response = await useAsyncData('get', () => $fetch('http://localhost:8080/api'));
-        //     console.log(response.data.value);
-        // }
+        if(!v$.value.$error){
+            await useAsyncData(() => $fetch('http://localhost:8080/api/auth/signin', {
+                method: 'POST',
+                body: JSON.stringify({
+                    "email": formData.email,
+                    "password": formData.password
+                })
+            })
+            .then((response) => {
+                appStore.alert.type = "alert-success";
+                appStore.alert.message = "Login realizado com sucesso! Você será redirecionado em instantes.";
+                appStore.alert.icon = "mdi:success-bold";
+                appStore.alert.show = true;
+                localStorage.setItem('token', JSON.stringify(response));
+                setTimeout(() => {
+                        router.push({
+                        path: "/calculator"
+                    })
+                }, 3000)
+            })
+            .catch((error) => {
+                if(error.status == 401){
+                    appStore.alert.type = "alert-warning";
+                    appStore.alert.message = "Credenciais inválidas.";
+                    appStore.alert.icon = "material-symbols:warning";
+                    appStore.alert.show = true;
+                }
+                else{
+                    appStore.alert.type = "alert-error";
+                    appStore.alert.message = "Houve um erro, tente novamente mais tarde.";
+                    appStore.alert.icon = "icon-park-solid:error";
+                    appStore.alert.show = true;
+                }
+            })
+            );
+        }
     }
 
     const formData = reactive({
-        email: '',
-        password: ''
+        email: 'heullr@gmail.com',
+        password: '123456'
     });
 
     import { required, email, helpers} from "@vuelidate/validators";

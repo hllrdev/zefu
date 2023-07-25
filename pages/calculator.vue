@@ -2,7 +2,7 @@
     <div>
         <NuxtLayout name="initial">
             <div class="pt-24 px-4 pb-10">
-                <Alert v-show="appStore.alert.show" />
+                <Alert class="top-16" v-show="appStore.alert.show" />
                 <h1 class="text-center">Calculadora</h1>
                 <h2 class="text-center font-semibold uppercase text-sm pb-6">
                     macros, taxa metabólica basal (tmb) e gasto energético total (get)
@@ -103,7 +103,7 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 
     import { useAppStore } from "~/store/appStore";
 
