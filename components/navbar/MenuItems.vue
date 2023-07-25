@@ -20,7 +20,7 @@
         },
         {
             "route": "Produtos",
-            "to": "/products"
+            "to": "/products/all"
         },
         {
             "route": "Calculadora",
