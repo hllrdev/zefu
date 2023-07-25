@@ -59,12 +59,14 @@
                 }, 3000)
             })
             .catch((error) => {
-
-                if(error.status == 409){
+                if(error.status == 400 || 409){
                     appStore.alert.type = "alert-warning";
-                    appStore.alert.message = "E-mail já cadastrado, utilize outro.";
                     appStore.alert.icon = "material-symbols:warning";
                     appStore.alert.show = true;
+                    if(error.status == 409)
+                        appStore.alert.message = "E-mail já cadastrado, utilize outro.";
+                    else
+                        appStore.alert.message = "E-mail já cadastrado via login Google.";
                 }
                 else{
                     appStore.alert.type = "alert-error";
@@ -78,10 +80,10 @@
     }
 
     const formData = reactive({
-        name: 'Héuller',
-        email: 'heullr@gmail.com',
-        password: '123456',
-        confirmPassword: '123456',
+        name: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
     });
 
     import { required, email, sameAs, minLength, helpers} from "@vuelidate/validators";

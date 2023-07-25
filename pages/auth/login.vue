@@ -17,10 +17,10 @@
                     </div>
                     <div class="flex justify-center flex-col">
                         <button type="button" class="btn btn-accent w-full mb-4" @click="submitForm">Entrar</button>
-                        <button class="btn btn-outline border-black">
+                        <a href="http://localhost:8080" class="btn btn-outline border-black">
                             <Icon name="flat-color-icons:google" size="1.25rem"></Icon> 
                             <span class="text-black">Entrar com Google</span>
-                        </button>
+                        </a>
                     </div>
                 </form>
                 <p class="text-sm text-center"> Ainda não possui uma conta? <NuxtLink to="/auth/signup"><span class="font-semibold ml-2">Cadastrar</span></NuxtLink></p>
@@ -37,7 +37,7 @@
 
     const router = useRouter();
 
-    const submitForm= async () => {
+    const submitForm = async () => {
         v$.value.$validate();
         if(!v$.value.$error){
             await useAsyncData(() => $fetch('http://localhost:8080/api/auth/signin', {
@@ -78,8 +78,8 @@
     }
 
     const formData = reactive({
-        email: 'heullr@gmail.com',
-        password: '123456'
+        email: '',
+        password: ''
     });
 
     import { required, email, helpers} from "@vuelidate/validators";
