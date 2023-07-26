@@ -31,21 +31,40 @@
                                         </td>
                                         <td>
                                             <div class="flex flex-col md:flex-row justify-center items-center">
-                                                <Icon name="mdi:show" size="1.5rem"/>
-                                                <Icon name="material-symbols:edit" size="1.5rem"/>
-                                                <Icon name="material-symbols:delete" size="1.5rem"/> 
+                                                <Icon class="cursor-pointer" name="mdi:show" size="1.5rem"/>
+                                                <Icon class="cursor-pointer" name="material-symbols:edit" size="1.5rem"/>
+                                                <Icon class="cursor-pointer" name="material-symbols:delete" size="1.5rem" onclick="delete_dialog.showModal()"/> 
                                             </div>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
+                        <dialog id="delete_dialog" class="modal modal-bottom sm:modal-middle">
+                            <form method="dialog" class="modal-box bg-primary">
+                                <h3 class="font-bold text-lg">Excluir produto</h3>
+                                <p class="py-4">Deseja excluir esse produto?</p>
+                                <div class="modal-action">
+                                <!-- if there is a button in form, it will close the modal -->
+                                <button class="btn hover:bg-neutral-800">Cancelar</button>
+                                <button class="btn hover:bg-red-600 hover:border-red-600">Confirmar</button>
+                                </div>
+                            </form>
+                        </dialog>
                     </div>
                 </div>
             </div>
         </NuxtLayout>
     </div>
 </template>
+
+<script setup lang="ts">
+
+    const aqui = () => {
+        alert('opa')
+    }
+
+</script>
 
 <style scoped>
 
