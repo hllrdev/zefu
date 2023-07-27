@@ -30,61 +30,26 @@
 
 <script setup lang="ts">
 
-    import { useAppStore } from "~/store/appStore";
+    import { useAuthStore } from "~/store/authStore";
 
-    const appStore = useAppStore();
-
+    const authStore = useAuthStore();
     const router = useRouter();
+
+    const formData = reactive({
+        name: 'heuller',
+        email: 'heuller555@gmail.com',
+        password: '123456',
+        confirmPassword: '123456',
+    });
 
     const submitForm = async () => {
         v$.value.$validate();
         if(!v$.value.$error){
-            await useAsyncData(() => $fetch('http://localhost:8080/api/auth/signup', {
-                method: 'POST',
-                body: JSON.stringify({
-                    "name": formData.name,
-                    "email": formData.email,
-                    "password": formData.password
-                })
-            })
-            .then(() => {
-                appStore.alert.type = "alert-success";
-                appStore.alert.message = "Cadastro realizado com sucesso!";
-                appStore.alert.icon = "mdi:success-bold";
-                appStore.alert.show = true;
-                setTimeout(() => {
-                        router.push({
-                        path: "/auth/login"
-                    })
-                }, 3000)
-            })
-            .catch((error) => {
-                if(error.status == 400 || 409){
-                    appStore.alert.type = "alert-warning";
-                    appStore.alert.icon = "material-symbols:warning";
-                    appStore.alert.show = true;
-                    if(error.status == 409)
-                        appStore.alert.message = "E-mail já cadastrado, utilize outro.";
-                    else
-                        appStore.alert.message = "E-mail já cadastrado via login Google.";
-                }
-                else{
-                    appStore.alert.type = "alert-error";
-                    appStore.alert.message = "Houve um erro, tente novamente mais tarde.";
-                    appStore.alert.icon = "icon-park-solid:error";
-                    appStore.alert.show = true;
-                }
-            })
-            );
+            await authStore.signUpUser({name: formData.name, email: formData.email, password: formData.password});
+            if(authStore.authenticated)
+                router.push("/");
         }
     }
-
-    const formData = reactive({
-        name: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-    });
 
     import { required, email, sameAs, minLength, helpers} from "@vuelidate/validators";
 
@@ -104,12 +69,10 @@
             confirmPassword: { 
                 required: helpers.withMessage('Preencha o confirmar senha', required), 
                 sameAs: helpers.withMessage('As senhas são diferentes', sameAs(formData.password))}
-
         }
     })
 
     import { useVuelidate  } from "@vuelidate/core";
-
     const v$ = useVuelidate(rules, formData);
 
 </script>

@@ -31,56 +31,24 @@
 
 <script setup lang="ts">
 
-    import { useAppStore } from "~/store/appStore";
+    import { useAuthStore } from "~/store/authStore";
 
-    const appStore = useAppStore();
-
+    const authStore = useAuthStore();
     const router = useRouter();
+
+    const formData = reactive({
+        email: 'heuller555@gmail.com',
+        password: '123456'
+    });
 
     const submitForm = async () => {
         v$.value.$validate();
         if(!v$.value.$error){
-            await useAsyncData(() => $fetch('http://localhost:8080/api/auth/signin', {
-                method: 'POST',
-                body: JSON.stringify({
-                    "email": formData.email,
-                    "password": formData.password
-                })
-            })
-            .then((response) => {
-                appStore.alert.type = "alert-success";
-                appStore.alert.message = "Login realizado com sucesso! Você será redirecionado em instantes.";
-                appStore.alert.icon = "mdi:success-bold";
-                appStore.alert.show = true;
-                localStorage.setItem('token', JSON.stringify(response));
-                setTimeout(() => {
-                        router.push({
-                        path: "/calculator"
-                    })
-                }, 3000)
-            })
-            .catch((error) => {
-                if(error.status == 401){
-                    appStore.alert.type = "alert-warning";
-                    appStore.alert.message = "Credenciais inválidas.";
-                    appStore.alert.icon = "material-symbols:warning";
-                    appStore.alert.show = true;
-                }
-                else{
-                    appStore.alert.type = "alert-error";
-                    appStore.alert.message = "Houve um erro, tente novamente mais tarde.";
-                    appStore.alert.icon = "icon-park-solid:error";
-                    appStore.alert.show = true;
-                }
-            })
-            );
+           await authStore.signInUser({email: formData.email, password: formData.password});
+           if(authStore.authenticated)
+                router.push("/");
         }
     }
-
-    const formData = reactive({
-        email: '',
-        password: ''
-    });
 
     import { required, email, helpers} from "@vuelidate/validators";
 
@@ -97,7 +65,6 @@
     })
 
     import { useVuelidate  } from "@vuelidate/core";
-
     const v$ = useVuelidate(rules, formData);
 
 </script>
