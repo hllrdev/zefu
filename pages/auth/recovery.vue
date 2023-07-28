@@ -10,13 +10,21 @@
                     </div>
                     <button type="button" class="btn w-full" @click="submitForm">Recuperar</button>
                 </form>
-                <p class="text-sm text-center">Lembrou a senha? <NuxtLink to="/auth/login"><span class="font-semibold ml-2">Entrar</span></NuxtLink></p>
+                <p class="text-sm text-center">Lembrou a senha? <NuxtLink to="/auth/signin"><span class="font-semibold ml-2">Entrar</span></NuxtLink></p>
             </div>
         </NuxtLayout>
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+
+    const authStore = useAuthStore();
+    const router = useRouter();
+
+    onMounted(() => {
+        if(authStore.authenticated)
+            router.push("/")
+    })
 
     const submitForm= () => {
         v$.value.$validate();
@@ -38,6 +46,7 @@
     })
 
     import { useVuelidate  } from "@vuelidate/core";
+    import { useAuthStore } from "~/store/authStore";
 
     const v$ = useVuelidate(rules, formData);
 

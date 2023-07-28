@@ -1,17 +1,29 @@
 <template>
     <ul class="text-white md:text-xs font-semibold pt-8 md:pt-0">
+        <li class="md:hidden mb-4">
+            <div v-if="props.authenticated">
+                <p class="text-white">Olá, <span class="text-primary">{{props.name}}</span></p>
+            </div>
+        </li>
         <li v-for="item, i in items" :key="i">
             <NuxtLink :to="item.to">{{ item.route }}</NuxtLink>
         </li>
         <li class="md:hidden mt-4">
-            <NuxtLink to="/auth/login"> 
-                <button class="btn btn-secondary btn-wide">Entrar</button>
-            </NuxtLink>
+            <div v-if="!props.authenticated">
+                <NuxtLink to="/auth/signin"> 
+                    <button class="btn btn-secondary btn-wide">Entrar</button>
+                </NuxtLink>
+            </div>
         </li>
     </ul>
 </template>
 
 <script setup>
+
+    const props  = defineProps({
+        authenticated: Boolean,
+        name: String
+    })
 
     const items = [
         {
@@ -20,7 +32,7 @@
         },
         {
             "route": "Produtos",
-            "to": "/products/all"
+            "to": "/products"
         },
         {
             "route": "Calculadora",

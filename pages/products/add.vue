@@ -37,7 +37,11 @@
 
 <script setup lang="ts">
 
-import { useAppStore } from "~/store/appStore";
+    import { useAppStore } from "~/store/appStore";
+
+    definePageMeta({
+        middleware: 'permission'
+    })
 
     const appStore = useAppStore();
 

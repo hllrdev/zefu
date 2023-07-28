@@ -22,7 +22,7 @@
                     </div>      
                     <button type="button" class="btn w-full" @click="submitForm">Cadastrar</button>
                 </form>
-                <p class="text-sm text-center">Já possui uma conta?<NuxtLink to="/auth/login"><span class="font-semibold ml-2">Entrar</span></NuxtLink></p>
+                <p class="text-sm text-center">Já possui uma conta?<NuxtLink to="/auth/signin"><span class="font-semibold ml-2">Entrar</span></NuxtLink></p>
             </div>
         </NuxtLayout>
     </div>
@@ -35,6 +35,11 @@
     const authStore = useAuthStore();
     const router = useRouter();
 
+    onMounted(() => {
+        if(authStore.authenticated)
+            router.push("/")
+    })
+
     const formData = reactive({
         name: 'heuller',
         email: 'heuller555@gmail.com',
@@ -46,8 +51,8 @@
         v$.value.$validate();
         if(!v$.value.$error){
             await authStore.signUpUser({name: formData.name, email: formData.email, password: formData.password});
-            if(authStore.authenticated)
-                router.push("/");
+            if(authStore.user)
+                router.push("/auth/signin");
         }
     }
 

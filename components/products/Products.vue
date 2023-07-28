@@ -8,7 +8,7 @@
                 <ProductsProduct />
             </div>
             <div class="flex justify-center">
-                <RouterLink to="/products/all">
+                <RouterLink to="/products">
                     <button class="btn bg-neutral-800 my-6 md:mt-10 btn-wide">Ver todos <Icon name="cil:arrow-right" color="white"/></button>
                 </RouterLink>
             </div>

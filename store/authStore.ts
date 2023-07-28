@@ -14,7 +14,9 @@ interface UserSignUpInterface {
 export const useAuthStore = defineStore('authStore', () => {
 
     const authenticated = ref(false);
-    const user = ref({});
+    const user:any = ref({
+
+    });
 
     const signInUser = async ({email, password}:UserSignInInterface) => {
 
@@ -48,21 +50,40 @@ export const useAuthStore = defineStore('authStore', () => {
             }
         }).then((response) => {
             user.value = response.data.value as Object;
-            authenticated.value = true;
         }).catch(() => {
             console.log("error");
         })
     }
 
-    const logout = () => {
-        localStorage.removeItem('token');
-        authenticated.value = false;
-        user.value = {};
+    const validate = async (token:string) => {
+        await useFetch('http://localhost:8080/api/auth/validate',{
+            method: "get",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            }
+        }).then((response) => {
+            // console.log(response.status.value)
+            if(response.data.value){
+                const value = response.data.value;
+                user.value = value;
+                authenticated.value = true;
+            }
+            
+        }).catch(() => {
+            console.log("error");
+        })
     }
+
+    // const logout = () => {
+    //     localStorage.removeItem('token');
+    //     authenticated.value = false;
+    //     user.value = {};
+    // }
 
     return {
         authenticated, user,
-        signInUser, signUpUser, logout
+        signInUser, signUpUser, validate
     }
 
 });
