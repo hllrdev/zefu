@@ -13,8 +13,10 @@ interface UserSignUpInterface {
 
 export const useAuthStore = defineStore('authStore', () => {
 
-    const authenticated = ref(false);
-    const user:any = ref({
+    const auth = reactive({
+
+        user: {},
+        authenticated: false
 
     });
 
@@ -31,8 +33,8 @@ export const useAuthStore = defineStore('authStore', () => {
             const value:any = response.data.value;
             const token = value.token;
             localStorage.setItem("token", token as string);
-            user.value = value.user;
-            authenticated.value = true;
+            auth.user = value.user;
+            auth.authenticated = true;
         }).catch(() => {
             console.log("error");
         });
@@ -49,31 +51,31 @@ export const useAuthStore = defineStore('authStore', () => {
                 password
             }
         }).then((response) => {
-            user.value = response.data.value as Object;
+            auth.user = response.data.value as Object;
         }).catch(() => {
             console.log("error");
         })
     }
 
     const validate = async (token:string) => {
-        await useFetch('http://localhost:8080/api/auth/validate',{
+        
+        const valid = await useFetch('http://localhost:8080/api/auth/validate',{
             method: "get",
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + token
             }
         }).then((response) => {
-            // console.log(response.status.value)
-            if(response.data.value){
-                const value = response.data.value;
-                user.value = value;
-                authenticated.value = true;
-            }
+            return response.data.value;
             
         }).catch(() => {
-            console.log("error");
+            return null;
         })
+
+        return valid;
     }
+
+
 
     // const logout = () => {
     //     localStorage.removeItem('token');
@@ -82,7 +84,7 @@ export const useAuthStore = defineStore('authStore', () => {
     // }
 
     return {
-        authenticated, user,
+        auth,
         signInUser, signUpUser, validate
     }
 

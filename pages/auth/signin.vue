@@ -4,7 +4,6 @@
             <div>
                 <form action="" class="py-6">
                     <h1 class="text-center pb-6">Login</h1>
-                    {{ authStore.authenticated }}
                     <div class="pb-2">
                         <Input name="email" type="email" label="E-mail" placeholder="Digite aqui seu e-mail" @update:model-value="formData.email = $event"/>
                         <span class="text-error font-medium text-xs" v-if="v$.email.$error">{{ v$.email.$errors[0].$message }}</span>
@@ -37,21 +36,16 @@
     const authStore = useAuthStore();
     const router = useRouter();
 
-    onMounted(() => {
-        if(authStore.authenticated)
-            router.push("/")
-    })
-
     const formData = reactive({
-        email: 'heuller555@gmail.com',
-        password: '123456'
+        email: '',
+        password: ''
     });
 
     const submitForm = async () => {
         v$.value.$validate();
         if(!v$.value.$error){
            await authStore.signInUser({email: formData.email, password: formData.password});
-           if(authStore.authenticated)
+           if(authStore.auth.authenticated)
                 router.push("/");
         }
     }

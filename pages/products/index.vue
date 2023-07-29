@@ -5,7 +5,7 @@
                 <h1 class="text-center pb-6">Produtos</h1>
                 <div class="flex justify-center">
                     <div class="md:w-4/5">
-                        <div v-show="permission" class="flex justify-end md:pr-6 pb-6">
+                        <div class="flex justify-end md:pr-6 pb-6">
                             <NuxtLink to="/products/list"><button class="btn btn-primary">Gerenciar <Icon name="material-symbols:app-registration" size="1.5rem" color="white"></Icon></button></NuxtLink>
                         </div>
                         <div class="grid md:grid-cols-2 lg:grid-cols-3 md:gap-6">
@@ -22,8 +22,6 @@
 </template>
 
 <script setup lang="ts">
-    import { useAuthStore } from '~/store/authStore';
-
 
     onMounted(()=>{
         if(process.client){
@@ -50,19 +48,5 @@
             }  
         }
     }
-
-    const authStore = useAuthStore();
-
-    const permission = computed(() => {
-        if(authStore.authenticated){
-            const roles = authStore.user.roles;
-            for (let index = 0; index < roles.length; index++) {
-                if(roles[index].role == 'MANAGER' || roles[index].role == 'ADMIN'){
-                    return true;
-                }
-            }
-        }
-        return false;
-    })
 
 </script>

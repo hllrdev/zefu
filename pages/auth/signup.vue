@@ -35,23 +35,18 @@
     const authStore = useAuthStore();
     const router = useRouter();
 
-    onMounted(() => {
-        if(authStore.authenticated)
-            router.push("/")
-    })
-
     const formData = reactive({
-        name: 'heuller',
-        email: 'heuller555@gmail.com',
-        password: '123456',
-        confirmPassword: '123456',
+        name: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
     });
 
     const submitForm = async () => {
         v$.value.$validate();
         if(!v$.value.$error){
             await authStore.signUpUser({name: formData.name, email: formData.email, password: formData.password});
-            if(authStore.user)
+            if(authStore.auth.user)
                 router.push("/auth/signin");
         }
     }

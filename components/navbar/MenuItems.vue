@@ -1,7 +1,7 @@
 <template>
     <ul class="text-white md:text-xs font-semibold pt-8 md:pt-0">
         <li class="md:hidden mb-4">
-            <div v-if="props.authenticated">
+            <div v-show="props.authenticated">
                 <p class="text-white">Olá, <span class="text-primary">{{props.name}}</span></p>
             </div>
         </li>
@@ -9,7 +9,7 @@
             <NuxtLink :to="item.to">{{ item.route }}</NuxtLink>
         </li>
         <li class="md:hidden mt-4">
-            <div v-if="!props.authenticated">
+            <div v-show="!props.authenticated">
                 <NuxtLink to="/auth/signin"> 
                     <button class="btn btn-secondary btn-wide">Entrar</button>
                 </NuxtLink>

@@ -1,6 +1,6 @@
 import { useAuthStore } from "~/store/authStore";
 
-export default defineNuxtRouteMiddleware((to, from) => {
+export default defineNuxtRouteMiddleware(async (to, from) => {
 
     const authStore = useAuthStore();
 
@@ -10,15 +10,15 @@ export default defineNuxtRouteMiddleware((to, from) => {
     ];
 
     if(process.client){
-        
-        if(!authStore.authenticated){
+        if(!authStore.auth.authenticated){
             const token = localStorage.getItem("token");
-            if(token)
-                authStore.validate(token);
-            else{
-                if(protectedRoutes.includes(to.fullPath))
-                    return navigateTo("/auth/signin")
-                }
+            if(token){
+                const response = await authStore.validate(token);
+                if(response){
+                    authStore.auth.user = response;
+                    authStore.auth.authenticated = true;
+                };
+            }
         }
     }
 })

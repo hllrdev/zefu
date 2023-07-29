@@ -37,16 +37,6 @@
 
 <script setup lang="ts">
 
-    import { useAppStore } from "~/store/appStore";
-
-    definePageMeta({
-        middleware: 'permission'
-    })
-
-    const appStore = useAppStore();
-
-    const router = useRouter();
-
     const submitForm = async () => {
         v$.value.$validate();
          if(!v$.value.$error){

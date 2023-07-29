@@ -18,14 +18,6 @@
 
 <script setup lang="ts">
 
-    const authStore = useAuthStore();
-    const router = useRouter();
-
-    onMounted(() => {
-        if(authStore.authenticated)
-            router.push("/")
-    })
-
     const submitForm= () => {
         v$.value.$validate();
     }
