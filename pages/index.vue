@@ -1,13 +1,11 @@
 <template>
     <div>
-        <NuxtLayout name="initial">
-            <Home />
-            <Products />
-            <Group />
+        <NuxtLayout name="main">
+            <template #content>
+                <Home />
+                <Products />
+                <Group />
+            </template>
         </NuxtLayout>
     </div>
 </template>
-
-<script setup lang="ts">
-
-</script>

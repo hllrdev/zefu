@@ -1,3 +1,16 @@
+<script setup>
+    const props  = defineProps({
+        authenticated: Boolean,
+        name: String
+    })
+
+    const items = [
+        {"route": "Início","to": "/"},
+        {"route": "Produtos","to": "/products"},
+        {"route": "Calculadora","to": "/calculator"}
+    ]
+</script>
+
 <template>
     <ul class="text-white md:text-xs font-semibold pt-8 md:pt-0">
         <li class="md:hidden mb-4">
@@ -17,30 +30,6 @@
         </li>
     </ul>
 </template>
-
-<script setup>
-
-    const props  = defineProps({
-        authenticated: Boolean,
-        name: String
-    })
-
-    const items = [
-        {
-            "route": "Início",
-            "to": "/"
-        },
-        {
-            "route": "Produtos",
-            "to": "/products"
-        },
-        {
-            "route": "Calculadora",
-            "to": "/calculator"
-        }
-    ]
-
-</script>
 
 <style scoped>
     li {

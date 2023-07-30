@@ -1,10 +1,9 @@
 <template>
     <div>
-        <RouterLink to="/">
+        <NuxtLink to="/">
             <div class="text-3xl lilita">
                 ZEFU
             </div>
-        </RouterLink>
+        </NuxtLink>
     </div>
-    
 </template>

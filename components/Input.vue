@@ -1,3 +1,18 @@
+<script setup>
+    const emit = defineEmits([
+        "update:modelValue"
+    ])
+
+    const props = defineProps({
+        name: {type:String,required:true},
+        type: {type: String,default: "text"},
+        label: {type: String,required: true,},
+        placeholder: {type: String,required: true},
+        value: {type: String,required: false},
+        disabled: {type: Boolean,required: false}
+    })
+</script>
+
 <template>
     <div class="form-control">
         <label class="label">
@@ -10,38 +25,3 @@
         <span>{{ props.error }}</span>
     </div>
 </template>
-
-<script setup>
-
-    const emit = defineEmits([
-        "update:modelValue"
-    ])
-
-    const props = defineProps({
-        name: {
-            type:String,
-            required:true
-        },
-        type: {
-            type: String,
-            default: "text"
-        },
-        label: {
-            type: String,
-            required: true,
-        },
-        placeholder: {
-            type: String,
-            required: true
-        },
-        value: {
-            type: String,
-            required: false
-        },
-        disabled: {
-            type: Boolean,
-            required: false
-        }
-    })
-
-</script>

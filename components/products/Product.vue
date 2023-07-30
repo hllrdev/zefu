@@ -6,7 +6,7 @@
                 <div class="h-1/3 w-full absolute bottom-0 z-10 bg-neutral-800 opacity-90 p-4 flex">
                     <p class="text-white font-bold opacity-100 text-sm">Panelas com cabo intercambiável, Tramontina</p>
                     <div class="flex items-end">
-                        <Icon name="cil:arrow-right" color="white" size="1.5rem" />
+                        <Icon class="w-6 h-auto" name="cil:arrow-right" color="white" />
                     </div>
                 </div>
             </a>

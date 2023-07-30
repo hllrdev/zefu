@@ -1,8 +1,22 @@
+<script setup>
+    import { useAuthStore } from "~/store/authStore";
+    const authStore = useAuthStore();
+
+    const name = ref('');
+
+    onMounted(() => {
+        if(authStore.auth.authenticated){
+            const user = authStore.auth.user;
+            name.value = user.name.split(" ")[0];
+        }
+    })
+</script>
+
 <template>
     <div class="fixed w-full z-50">
         <nav class="h-14 bg-neutral-focus px-6 md:px-14 grid grid-cols-3 md:flex justify-between items-center">
             <label for="navbar-drawer" class="md:hidden">
-                <Icon name="material-symbols:menu" color="white" size="2rem" />
+                <Icon class="w-7 h-auto" name="material-symbols:menu" color="white" />
             </label>
             <NavbarMenuItems class="md:flex hidden gap-4" />
             <NameLogo class="text-white text-center"/>
@@ -26,20 +40,3 @@
         </div>
     </div>
 </template>
-
-
-<script setup lang="ts">
-
-    import { useAuthStore } from "~/store/authStore";
-    const authStore = useAuthStore();
-
-    const name = ref('');
-
-    onMounted(() => {
-        if(authStore.auth.authenticated){
-            const user:any = authStore.auth.user;
-            name.value = user.name.split(" ")[0];
-        }
-    })
-
-</script>

@@ -14,10 +14,8 @@ interface UserSignUpInterface {
 export const useAuthStore = defineStore('authStore', () => {
 
     const auth = reactive({
-
         user: {},
         authenticated: false
-
     });
 
     const signInUser = async ({email, password}:UserSignInInterface) => {

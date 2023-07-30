@@ -5,7 +5,7 @@
             <div class="md:w-9/12 lg:w-4/12">
                 <div class="flex flex-col">
                     <div class="h-full md:flex items-center justify-center">
-                        <slot />
+                        <slot name="content" />
                     </div>
                 </div>
             </div>

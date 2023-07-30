@@ -8,6 +8,5 @@
                 <img class="w-60" src="~/assets/images/zeffih.png" alt="Personagem Zeff do anime One Piece segurando Sanji em seus ombros.">
             </div>
         </div>
-        
     </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
     <div>
         <NuxtLink to="/">
-            <Icon name="mdi:cook" size="3rem" color="grey"  />
+            <Icon class="w-12 h-auto" name="mdi:cook" color="grey" />
         </NuxtLink>
     </div>
 </template>
