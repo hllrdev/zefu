@@ -1,3 +1,21 @@
+<script setup>
+
+    const products = ref([]);
+
+    onMounted(async () => {
+
+        products.value = 
+            await $fetch('http://localhost:8080/api/products',
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                }
+            })
+
+    })
+
+</script>
+
 <template>
     <div>
         <NuxtLayout name="main">
@@ -7,7 +25,12 @@
                     <div class="flex justify-center">
                         <div class="md:w-4/5 lg:w-3/5">
                             <div class="flex justify-end md:pr-6 pb-6">
-                                <NuxtLink to="/products/add"><button class="btn btn-primary">Cadastrar<Icon class="w-6 h-auto" name="gridicons:add" color="white"></Icon></button></NuxtLink>
+                                <NuxtLink class="btn hover:text-primary" to="/products/add">
+                                    <div class="flex items-center gap-2">
+                                        Cadastrar
+                                        <Icon class="w-6 h-auto" name="gridicons:add" color="white"></Icon>
+                                    </div>   
+                                </NuxtLink>
                             </div>
                             <div class="overflow-x-auto">
                                 <table class="table">
@@ -18,23 +41,51 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <tr v-for="product in products" :key="product.id">
                                             <td>
                                                 <div class="flex items-center">
                                                     <div class="avatar">
                                                         <div class="mask mask-squircle w-12 h-12">
-                                                            <img src="https://m.media-amazon.com/images/I/6169MGHxQuL._AC_SL1000_.jpg" alt="Avatar Tailwind CSS Component" />
+                                                            <img :src="'http://localhost:8080' + product.photo" alt="Photo product" />
                                                         </div>
                                                     </div>
-                                                    <span>Panelas com cabo intercambiável, Tramontina</span>
+                                                    <span>{{ product.title }}</span>
                                                 </div>
                                                 
                                             </td>
                                             <td>
                                                 <div class="flex flex-col md:flex-row justify-center items-center">
-                                                    <Icon class="cursor-pointer w-6 h-auto" name="mdi:show" />
-                                                    <Icon class="cursor-pointer w-6 h-auto" name="material-symbols:edit" />
+                                                    <NuxtLink :to="{
+                                                        path: '/products/view',
+                                                        query: {
+                                                            title: product.title,
+                                                            link: product.link,
+                                                            photo: product.photo
+                                                        }
+                                                    }">
+                                                        <Icon class="cursor-pointer w-6 h-auto" name="mdi:show" />
+                                                    </NuxtLink> 
+
+                                                    <NuxtLink :to="{
+                                                        path: '/products/edit',
+                                                        query: {
+                                                            id: product.id,
+                                                            title: product.title,
+                                                            link: product.link,
+                                                            photo: product.photo
+                                                        }
+                                                    }">
+                                                        <Icon class="cursor-pointer w-6 h-auto" name="material-symbols:edit" />
+                                                    </NuxtLink> 
+
                                                     <Icon class="cursor-pointer w-6 h-auto" name="material-symbols:delete" onclick="delete_dialog.showModal()"/> 
+
+                                                    
+
+
+
+                                                    
+                                     
                                                 </div>
                                             </td>
                                         </tr>

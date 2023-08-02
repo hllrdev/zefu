@@ -52,7 +52,7 @@
                         <div class="md:w-4/5">
                             <div v-if="permission" class="flex justify-end md:pr-6 pb-6">
                                 <NuxtLink to="/products/list">
-                                    <span class="btn btn-primary">Gerenciar
+                                    <span class="btn hover:text-primary text-white">Gerenciar
                                         <Icon class="w-6 h-auto" name="material-symbols:app-registration" color="white"></Icon>
                                     </span>
                                 </NuxtLink>

@@ -55,35 +55,16 @@ export const useAuthStore = defineStore('authStore', () => {
         })
     }
 
-    const validate = async (token:string) => {
-        
-        const valid = await useFetch('http://localhost:8080/api/auth/validate',{
-            method: "get",
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + token
-            }
-        }).then((response) => {
-            return response.data.value;
-            
-        }).catch(() => {
-            return null;
-        })
-
-        return valid;
-    }
-
-
-
-    // const logout = () => {
-    //     localStorage.removeItem('token');
-    //     authenticated.value = false;
-    //     user.value = {};
-    // }
+    const nameFormatted = computed(() => {
+        const user:any = auth.user;
+        if(user.name)
+            return user.name.split(" ")[0];
+        return null;
+    })
 
     return {
-        auth,
-        signInUser, signUpUser, validate
+        auth, nameFormatted,
+        signInUser, signUpUser
     }
 
 });

@@ -8,10 +8,10 @@
         <div>
             <div class="grid grid-flow-col gap-4">
                 <a href="https://www.instagram.com/perna.vermelha/" target="_blank">
-                    <Icon class="w-5 h-auto" name="mdi:instagram"/>
+                    <Icon class="w-7 h-auto" name="mdi:instagram"/>
                 </a>
                 <a href="https://chat.whatsapp.com/IKsrJ3xScsnApKY4eqQpeE" target="_blank">
-                    <Icon class="w-5 h-auto" name="ic:baseline-whatsapp"/>
+                    <Icon class="w-7 h-auto" name="ic:baseline-whatsapp"/>
                 </a>        
             </div>
         </div> 

@@ -1,9 +1,26 @@
 <script setup>
     const submitForm = async () => {
         v$.value.$validate();
-         if(!v$.value.$error){
-            await $fetch('http://localhost:8080/api/products')
-            .then((res) => {console.log(res)}).catch((error) => {console.log(error)});
+
+        const form = new FormData();
+        form.append('title', formData.title);
+        form.append('link', formData.link);
+        form.append('photo', formData.photo);
+
+        if(!v$.value.$error){
+            await $fetch('http://localhost:8080/api/products',
+            {
+                method: 'POST',
+                body: form,
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                }
+            }
+            ).then((response) => {
+                console.log(response)
+            }).catch((error) => {
+                console.log(error)
+            })
         }
     }
 
@@ -15,8 +32,8 @@
     }
 
     const formData = reactive({
-        title: 'titulo',
-        link: 'aqui',
+        title: '',
+        link: '',
         photo: ''
     })
 
@@ -55,7 +72,7 @@
                                     <span class="label-text text-neutral-600">Foto do produto</span>
                                 </label>
                                 <div class="mt-3 md:mb-12">
-                                    <label class="border p-3 cursor-pointer hover:bg-neutral-100" for="photo">Selecionar arquivo</label>
+                                    <label class="border py-3 px-5 cursor-pointer hover:bg-neutral-100" for="photo">Selecionar arquivo</label>
                                     <span class="text-error font-medium text-xs mx-2" v-if="v$.photo.$error">{{ v$.photo.$errors[0].$message }}</span>
                                     <span class="block mt-6 mx-2 md:mt-0 md:inline" >{{ photoFilename }}</span>
                                     <input type="file" id="photo" name="photo" class="invisible" @change="changeFileInput" />

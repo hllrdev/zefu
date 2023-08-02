@@ -1,6 +1,12 @@
 <script setup>
-   const title = ref("Titulozinho do product");
-   const link = ref("Linkzin do product");
+
+   const route = useRoute();
+
+   const values = route.query;
+
+   const title = values.title;
+   const link = values.link;
+   const photo = values.photo;
 </script>
 
 <template>
@@ -12,13 +18,13 @@
                     <div class="flex justify-center">
                         <div class="md:w-4/5 lg:w-3/5">
                             <form action="">
-                                <Input disabled :value="title" class="mb-2" name="title" label="Título" placeholder="Digite o título do produto" />
-                                <Input disabled :value="link" class="mb-2" name="link" label="Link" placeholder="Digite o link de afiliado" />
+                                <Input disabled :value="title" class="mb-2" size="md:max-w-2xl" name="title" label="Título" placeholder="Digite o título do produto" />
+                                <Input disabled :value="link" class="mb-2" size="md:max-w-2xl" name="link" label="Link" placeholder="Digite o link de afiliado" />
                                 <label class="label">
                                     <span class="label-text text-neutral-600">Foto do produto</span>
                                 </label>
                                 <div class="flex justify-center pb-6 pt-2">
-                                    <img class="w-72" src="https://m.media-amazon.com/images/I/6169MGHxQuL._AC_SL1000_.jpg" />
+                                    <img class="w-72" :src="'http://localhost:8080' + photo" />
                                 </div>
                             </form>
                         </div>

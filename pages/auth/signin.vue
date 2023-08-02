@@ -5,8 +5,8 @@
     const router = useRouter();
 
     const formData = reactive({
-        email: '',
-        password: ''
+        email: 'hllrdev@gmail.com',
+        password: '123456'
     });
 
     const submitForm = async () => {

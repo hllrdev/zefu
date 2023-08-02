@@ -1,15 +1,8 @@
 <script setup>
     import { useAuthStore } from "~/store/authStore";
+
     const authStore = useAuthStore();
 
-    const name = ref('');
-
-    onMounted(() => {
-        if(authStore.auth.authenticated){
-            const user = authStore.auth.user;
-            name.value = user.name.split(" ")[0];
-        }
-    })
 </script>
 
 <template>
@@ -22,7 +15,7 @@
             <NameLogo class="text-white text-center"/>
             <div class="hidden md:flex ">
                 <div v-show="authStore.auth.authenticated">
-                    <p class="text-white">Olá, <span class="text-sm text-primary font-semibold">{{ name }}</span></p>
+                    <p class="text-white">Olá, <span class="text-sm text-primary font-semibold">{{ authStore.nameFormatted }}</span></p>
                 </div>
                 <div v-show="!authStore.auth.authenticated">
                     <NuxtLink to="/auth/signin">
@@ -35,7 +28,7 @@
             <input id="navbar-drawer" type="checkbox" class="drawer-toggle"/>
             <div class="drawer-side z-50">
                 <label for="navbar-drawer" class="drawer-overlay"></label>
-                <NavbarMenuItems :authenticated="authStore.auth.authenticated" :name="name" class="menu p-4 w-80 h-full bg-base-200" />
+                <NavbarMenuItems :authenticated="authStore.auth.authenticated" :name="authStore.nameFormatted" class="menu p-4 w-80 h-full bg-base-200" />
             </div>
         </div>
     </div>
