@@ -1,11 +1,8 @@
 <script setup>
-
     import { useAuthStore  } from '~/store/authStore';
 
     const products = ref([]);
-
     const authStore = useAuthStore();
-
     const {data, pending} = await useFetch('http://localhost:8080/api/products',
     {
         headers: {
@@ -15,6 +12,35 @@
 
     products.value = data.value;
 
+    const deleteProductId = ref('');
+
+    const showDialogDeleteProduct = (id) => {
+        deleteProductId.value = id;
+        const deleteDialog = document.getElementById('delete_dialog');
+        deleteDialog.showModal();
+    }
+
+    const submitDeleteProduct = async () => {
+        await $fetch(`http://localhost:8080/api/products/${deleteProductId.value}`,
+            {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                }
+            }
+            ).then((response) => {
+                console.log(response);
+                products.value = products.value.filter(product => product.id != deleteProductId.value);
+                deleteProductId.value = '';
+            }).catch((error) => {
+                console.log(error)
+            })
+    }
+
+    const filteredProducts = 
+
+    console.log(products.value)
+    console.log(filteredProducts)
 
 </script>
 
@@ -44,30 +70,26 @@
                                     </thead>
                                     <tbody v-if="!pending">
                                         <tr v-for="product in products" :key="product.id">
-                                            <td>
-                                                <div class="flex items-center">
-                                                    <div class="avatar">
-                                                        <div class="mask mask-squircle w-12 h-12">
-                                                            <img :src="'http://localhost:8080/api/static' + product.photo" alt="Photo product" />
+                                            <NuxtLink :to="{
+                                                path: '/products/view',
+                                                query: {
+                                                    title: product.title,
+                                                    link: product.link,
+                                                    photo: product.photo
+                                                }}">
+                                                <td>
+                                                    <div class="flex items-center">
+                                                        <div class="avatar">
+                                                            <div class="mask mask-squircle w-12 h-12">
+                                                                <img :src="'http://localhost:8080/api/static' + product.photo" alt="Photo product" />
+                                                            </div>
                                                         </div>
+                                                        <span>{{ product.title }}</span>
                                                     </div>
-                                                    <span>{{ product.title }}</span>
-                                                </div>
-                                                
-                                            </td>
+                                                </td>
+                                            </NuxtLink>
                                             <td>
                                                 <div class="flex flex-col md:flex-row justify-center items-center">
-                                                    <NuxtLink :to="{
-                                                        path: '/products/view',
-                                                        query: {
-                                                            title: product.title,
-                                                            link: product.link,
-                                                            photo: product.photo
-                                                        }
-                                                    }">
-                                                        <Icon class="cursor-pointer w-6 h-auto" name="mdi:show" />
-                                                    </NuxtLink> 
-
                                                     <NuxtLink :to="{
                                                         path: '/products/edit',
                                                         query: {
@@ -77,17 +99,11 @@
                                                             photo: product.photo
                                                         }
                                                     }">
-                                                        <Icon class="cursor-pointer w-6 h-auto" name="material-symbols:edit" />
+                                                        <Icon class="cursor-pointer w-6 h-auto hover:text-primary" name="material-symbols:edit" />
                                                     </NuxtLink> 
-
-                                                    <Icon class="cursor-pointer w-6 h-auto" name="material-symbols:delete" onclick="delete_dialog.showModal()"/> 
-
-                                                    
-
-
-
-                                                    
-                                     
+                                                    <div @click="showDialogDeleteProduct(product.id)">
+                                                        <Icon class="cursor-pointer w-6 h-auto hover:text-primary" name="material-symbols:delete"/> 
+                                                    </div>
                                                 </div>
                                             </td>
                                         </tr>
@@ -95,13 +111,13 @@
                                 </table>
                             </div>
                             <dialog id="delete_dialog" class="modal modal-bottom sm:modal-middle">
-                                <form method="dialog" class="modal-box bg-primary">
+                                <form method="dialog" class="modal-box bg-neutral-100">
                                     <h3 class="font-bold text-lg">Excluir produto</h3>
                                     <p class="py-4">Deseja excluir esse produto?</p>
                                     <div class="modal-action">
                                     <!-- if there is a button in form, it will close the modal -->
-                                    <button class="btn hover:bg-neutral-800">Cancelar</button>
-                                    <button class="btn hover:bg-red-600 hover:border-red-600">Confirmar</button>
+                                    <button class="btn hover:bg-neutral-900" @click="deleteProductId = ''">Cancelar</button>
+                                    <button class="btn hover:bg-red-600 hover:border-red-600" @click="submitDeleteProduct">Confirmar</button>
                                     </div>
                                 </form>
                             </dialog>
