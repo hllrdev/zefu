@@ -1,18 +1,20 @@
 <script setup>
 
+    import { useAuthStore  } from '~/store/authStore';
+
     const products = ref([]);
 
-    onMounted(async () => {
+    const authStore = useAuthStore();
 
-        products.value = 
-            await $fetch('http://localhost:8080/api/products',
-            {
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem('token')
-                }
-            })
+    const {data, pending} = await useFetch('http://localhost:8080/api/products',
+    {
+        headers: {
+            'Authorization': `Bearer ${authStore.auth.token}`,
+        }
+    });
 
-    })
+    products.value = data.value;
+
 
 </script>
 
@@ -40,13 +42,13 @@
                                             <th>Ações</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody v-if="!pending">
                                         <tr v-for="product in products" :key="product.id">
                                             <td>
                                                 <div class="flex items-center">
                                                     <div class="avatar">
                                                         <div class="mask mask-squircle w-12 h-12">
-                                                            <img :src="'http://localhost:8080' + product.photo" alt="Photo product" />
+                                                            <img :src="'http://localhost:8080/api/static' + product.photo" alt="Photo product" />
                                                         </div>
                                                     </div>
                                                     <span>{{ product.title }}</span>

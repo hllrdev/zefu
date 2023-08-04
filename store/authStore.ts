@@ -15,14 +15,17 @@ export const useAuthStore = defineStore('authStore', () => {
 
     const auth = reactive({
         user: {},
-        authenticated: false
+        authenticated: false,
+        token: ''
     });
 
     const signInUser = async ({email, password}:UserSignInInterface) => {
 
         await useFetch('http://localhost:8080/api/auth/signin', {
             method: 'post',
-            headers: {'Content-Type': 'application/json'},
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: {
                 email,
                 password
@@ -33,6 +36,7 @@ export const useAuthStore = defineStore('authStore', () => {
             localStorage.setItem("token", token as string);
             auth.user = value.user;
             auth.authenticated = true;
+            auth.token = value.token;
         }).catch(() => {
             console.log("error");
         });

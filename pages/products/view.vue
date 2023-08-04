@@ -24,7 +24,7 @@
                                     <span class="label-text text-neutral-600">Foto do produto</span>
                                 </label>
                                 <div class="flex justify-center pb-6 pt-2">
-                                    <img class="w-72" :src="'http://localhost:8080' + photo" />
+                                    <img class="w-72" :src="'http://localhost:8080/api/static' + photo" />
                                 </div>
                             </form>
                         </div>
