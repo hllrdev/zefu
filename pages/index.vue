@@ -1,11 +1,9 @@
 <template>
-    <div>
-        <NuxtLayout name="main">
-            <template #content>
-                <Home />
-                <Products />
-                <Group />
-            </template>
-        </NuxtLayout>
-    </div>
+    <NuxtLayout name="main">
+        <template #content>
+            <Home />
+            <Products />
+            <Group />
+        </template>
+    </NuxtLayout>
 </template>

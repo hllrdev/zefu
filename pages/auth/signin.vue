@@ -37,34 +37,32 @@
 </script>
 
 <template>
-    <div>
-        <NuxtLayout name="auth">
-            <template #content>
-                <div>
-                    <form action="" class="py-6">
-                        <h1 class="text-center pb-6">Login</h1>
-                        <div class="pb-2">
-                            <Input name="email" type="email" label="E-mail" placeholder="Digite aqui seu e-mail" @update:model-value="formData.email = $event"/>
-                            <span class="text-error font-medium text-xs" v-if="v$.email.$error">{{ v$.email.$errors[0].$message }}</span>
+    <NuxtLayout name="auth">
+        <template #content>
+            <div>
+                <form action="" class="py-6">
+                    <h1 class="text-center pb-6">Login</h1>
+                    <div class="pb-2">
+                        <Input name="email" type="email" label="E-mail" placeholder="Digite aqui seu e-mail" @update:model-value="formData.email = $event"/>
+                        <span class="text-error font-medium text-xs" v-if="v$.email.$error">{{ v$.email.$errors[0].$message }}</span>
+                    </div>
+                    <div class="pb-2">
+                        <Input name="password" type="password" label="Senha" placeholder="Digite aqui sua senha" @update:model-value="formData.password = $event"/>
+                        <span class="text-error font-medium text-xs" v-if="v$.password.$error">{{ v$.password.$errors[0].$message }}</span>
+                        <div class="text-end pb-4 pt-1">   
+                            <NuxtLink to="/auth/recovery"><span class="text-sm">Esqueceu sua senha?</span></NuxtLink>
                         </div>
-                        <div class="pb-2">
-                            <Input name="password" type="password" label="Senha" placeholder="Digite aqui sua senha" @update:model-value="formData.password = $event"/>
-                            <span class="text-error font-medium text-xs" v-if="v$.password.$error">{{ v$.password.$errors[0].$message }}</span>
-                            <div class="text-end pb-4 pt-1">   
-                                <NuxtLink to="/auth/recovery"><span class="text-sm">Esqueceu sua senha?</span></NuxtLink>
-                            </div>
-                        </div>
-                        <div class="flex justify-center flex-col">
-                            <button type="button" class="btn btn-accent w-full mb-4" @click="submitForm">Entrar</button>
-                            <a href="http://localhost:8080" class="btn btn-outline border-black">
-                                <Icon class="w-5 h-auto" name="flat-color-icons:google"></Icon> 
-                                <span class="text-black">Entrar com Google</span>
-                            </a>
-                        </div>
-                    </form>
-                    <p class="text-sm text-center"> Ainda não possui uma conta? <NuxtLink to="/auth/signup"><span class="font-semibold ml-2">Cadastrar</span></NuxtLink></p>
-                </div>
-            </template>
-        </NuxtLayout>
-    </div>
+                    </div>
+                    <div class="flex justify-center flex-col">
+                        <button type="button" class="btn btn-accent w-full mb-4" @click="submitForm">Entrar</button>
+                        <a href="http://localhost:8080" class="btn btn-outline border-black">
+                            <Icon class="w-5 h-auto" name="flat-color-icons:google"></Icon> 
+                            <span class="text-black">Entrar com Google</span>
+                        </a>
+                    </div>
+                </form>
+                <p class="text-sm text-center"> Ainda não possui uma conta? <NuxtLink to="/auth/signup"><span class="font-semibold ml-2">Cadastrar</span></NuxtLink></p>
+            </div>
+        </template>
+    </NuxtLayout>
 </template>

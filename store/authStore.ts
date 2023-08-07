@@ -15,8 +15,7 @@ export const useAuthStore = defineStore('authStore', () => {
 
     const auth = reactive({
         user: {},
-        authenticated: false,
-        token: ''
+        authenticated: false
     });
 
     const signInUser = async ({email, password}:UserSignInInterface) => {
@@ -33,10 +32,11 @@ export const useAuthStore = defineStore('authStore', () => {
         }).then((response) => {
             const value:any = response.data.value;
             const token = value.token;
-            localStorage.setItem("token", token as string);
             auth.user = value.user;
             auth.authenticated = true;
-            auth.token = value.token;
+
+            localStorage.setItem("token", token as string);
+            // localStorage.setItem("user", JSON.stringify(auth.user));
         }).catch(() => {
             console.log("error");
         });
@@ -59,15 +59,34 @@ export const useAuthStore = defineStore('authStore', () => {
         })
     }
 
-    const nameFormatted = computed(() => {
-        const user:any = auth.user;
-        if(user.name)
-            return user.name.split(" ")[0];
-        return null;
-    })
+    const setUser = (user:object) => {
+    auth.user = user;
+    auth.authenticated = true;
+    }
+
+    const hasPermission = (acceptedPermissions:string[]) => {
+        const user:any = {...auth.user};
+        if(JSON.stringify(user) !== "{}"){
+            const roles = user.roles;
+
+            const userRoles = [];
+            for (let index = 0; index < roles.length; index++) {
+                const r = roles[index];
+                userRoles.push(r.role);
+            }
+
+            for (let index = 0; index < acceptedPermissions.length; index++) {
+                const acceptedPermission = acceptedPermissions[index];
+                if(userRoles.includes(acceptedPermission))
+                    return true;  
+            }
+        }
+        
+        return false;
+    }
 
     return {
-        auth, nameFormatted,
+        auth, setUser, hasPermission,
         signInUser, signUpUser
     }
 

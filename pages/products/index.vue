@@ -1,6 +1,7 @@
 <script setup>
     import { useAuthStore } from '~/store/authStore';
 
+    const scrollControl = ref(0);
     onMounted(()=>{
         if(process.client){
             window.addEventListener("scroll", handleScroll);
@@ -9,8 +10,6 @@
 
     const products = ref([1,2,3,4,5,6]);
     const loading = ref(false);
-
-    const scrollControl = ref(0);
 
     function handleScroll() {
         var element = document.body;
@@ -27,46 +26,35 @@
         }
     }
 
-    const permission = ref(false);
-
     const authStore = useAuthStore();
 
-    if(authStore.auth.authenticated){
-        const roles = authStore.auth.user.roles;
-        for (let index = 0; index < roles.length; index++) {
-            if(['ADMIN', 'MANAGER'].includes(roles[index].role)){
-                permission.value = true;
-                break;
-            }   
-        }
-    }
 </script>
 
 <template>
-    <div>
-        <NuxtLayout name="main">
-            <template #content>
-                <div class="pt-24 px-4 pb-10">
-                    <h1 class="text-center pb-6">Produtos</h1>
-                    <div class="flex justify-center">
-                        <div class="md:w-4/5">
-                            <div v-if="permission" class="flex justify-end md:pr-6 pb-6">
+    <NuxtLayout name="main">
+        <template #content>
+            <div class="pt-24 px-4 pb-10">
+                <h1 class="text-center pb-6">Produtos</h1>
+                <div class="flex justify-center">
+                    <div class="md:w-4/5">
+                        <ClientOnly>
+                            <div v-if="authStore.hasPermission(['ADMIN','MANAGER'])" class="flex justify-end md:pr-6 pb-6">
                                 <NuxtLink to="/products/list">
                                     <span class="btn hover:text-primary text-white">Gerenciar
                                         <Icon class="w-6 h-auto" name="material-symbols:app-registration" color="white"></Icon>
                                     </span>
                                 </NuxtLink>
                             </div>
-                            <div class="grid md:grid-cols-2 lg:grid-cols-3 md:gap-6">
-                                <ProductsProduct v-for="product, i in products" :key="i" />
-                            </div>
-                            <div v-show="loading" class="text-center pt-8">
-                                <span class="loading loading-spinner loading-md"></span>
-                            </div>
+                        </ClientOnly>
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 md:gap-6">
+                            <ProductsProduct v-for="product, i in products" :key="i" />
+                        </div>
+                        <div v-show="loading" class="text-center pt-8">
+                            <span class="loading loading-spinner loading-md"></span>
                         </div>
                     </div>
                 </div>
-            </template>
-        </NuxtLayout>
-    </div>
+            </div>
+        </template>
+    </NuxtLayout>
 </template>

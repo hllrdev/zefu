@@ -1,7 +1,13 @@
 <script setup>
-    import { useAuthStore } from "~/store/authStore";
-
+    import { useAuthStore } from '~/store/authStore';
     const authStore = useAuthStore();
+
+    const nameFormatted = computed(() => {
+        const user = {...authStore.auth.user};
+        if(user.name)
+            return user.name.split(" ")[0];
+        return null;
+    })
 
 </script>
 
@@ -14,21 +20,25 @@
             <NavbarMenuItems class="md:flex hidden gap-4" />
             <NameLogo class="text-white text-center"/>
             <div class="hidden md:flex ">
-                <div v-show="authStore.auth.authenticated">
-                    <p class="text-white">Olá, <span class="text-sm text-primary font-semibold">{{ authStore.nameFormatted }}</span></p>
-                </div>
-                <div v-show="!authStore.auth.authenticated">
-                    <NuxtLink to="/auth/signin">
-                        <button class="btn btn-sm btn-secondary text-xs px-10">Entrar</button>
-                    </NuxtLink>
-                </div>
+                <ClientOnly>
+                    <div v-show="authStore.auth.authenticated">
+                        <p class="text-white">Olá, <span class="text-sm text-primary font-semibold">{{ nameFormatted }}</span></p>
+                    </div>
+                    <div v-show="!authStore.auth.authenticated">
+                        <NuxtLink to="/auth/signin">
+                            <button class="btn btn-sm btn-secondary text-xs px-10">Entrar</button>
+                        </NuxtLink>
+                    </div>
+                </ClientOnly>
             </div>
         </nav>
         <div class="drawer">
             <input id="navbar-drawer" type="checkbox" class="drawer-toggle"/>
             <div class="drawer-side z-50">
                 <label for="navbar-drawer" class="drawer-overlay"></label>
-                <NavbarMenuItems :authenticated="authStore.auth.authenticated" :name="authStore.nameFormatted" class="menu p-4 w-80 h-full bg-base-200" />
+                <ClientOnly>
+                    <NavbarMenuItems :authenticated="authStore.auth.authenticated" :name="nameFormatted" class="menu p-4 w-80 h-full bg-base-200" />
+                </ClientOnly>
             </div>
         </div>
     </div>

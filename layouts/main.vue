@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <ClientOnly>
         <Navbar />
         <slot name="content"/>
         <Footer />
-    </div>
+    </ClientOnly>
 </template>

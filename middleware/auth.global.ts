@@ -1,52 +1,38 @@
-import { useAuthStore } from "~/store/authStore";
+import { useAuthStore } from "~/store/authStore"
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
+    if (process.server) return
 
-    // const authStore = useAuthStore();
+    if (process.client) {
+        const authStore = useAuthStore();
+        const token = localStorage.getItem('token');
+        if(!authStore.auth.authenticated && token){
+            await $fetch('http://localhost:8080/api/users/authenticated',
+                {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    }
+                }
+                ).then((response) => {
+                    authStore.setUser(response as object);
+                }).catch(() => {
+                    localStorage.removeItem('token')
+                }) 
+        }
 
-    // const protectedRoutes = [
-    //     '/calculator'
-    // ];
+        const authenticatedRoutes = ['/calculator'];
+        const needPermission = ['/products/add', '/products/edit', '/products/list', '/products/view'];
 
-    // const routesPermission = [
-    //     '/products/list', '/products/add', '/products/edit'
-    // ]
-
-    // let token = null;
-    // if(process.client)
-    //     token = localStorage.getItem("token");
-    //     if(token){
-    //         console.log("aqui validate")
-    //         await authStore.validate(token);
-    //     }
-    
-    // if(protectedRoutes.includes(to.fullPath) && (!authStore.auth.authenticated)){
-    //     return navigateTo("/auth/signin")
-    // }
-    // else if ((!authStore.auth.authenticated)) {
-    //     if(protectedRoutes.includes(to.fullPath) || routesPermission.includes(to.fullPath)){
-    //         return navigateTo("/auth/signin")
-    //     }
-    // }
-    // else if(to.fullPath.split("/")[1] == "auth"){
-    //     authStore.auth.authenticated = false;
-    //     authStore.auth.user = {};
-    //     localStorage.removeItem("token");
-    // }
-    // else if (routesPermission.includes(to.fullPath)){
-
-    //     const user:any = authStore.auth.user;
-    //     const roles = user.roles;
-    //     let permission = false;
-    //     const havePermission = ['ADMIN', 'MANAGER'];
-    //     for (let index = 0; index < roles.length; index++) {
-    //         if(havePermission.includes(roles[index].role))
-    //             permission = true;
-    //             break;      
-    //     }
-
-    //     if(!permission){
-    //         return navigateTo("/")
-    //     }
-    // }
-})
+        const route = to.path;
+        if(authenticatedRoutes.includes(route) && !authStore.auth.authenticated)
+            return navigateTo('/auth/signin');
+        else if(needPermission.includes(route)){
+            if(!authStore.auth.authenticated)
+                return navigateTo('/auth/signin');
+            else if(!authStore.hasPermission(['ADMIN','MANAGER'])){
+                return navigateTo('/errors/403');
+            }
+        }
+    }
+  })
