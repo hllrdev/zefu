@@ -17,13 +17,7 @@ module.exports = {
   ],
   daisyui: {
     themes: [
-      {
-        customtheme: {
-          "primary": "#96c2f8",
-          "secondary": "#659fe6",
-          "accent": "#3968a2"
-        }
-      }
+      "night"
     ]
   }
 }

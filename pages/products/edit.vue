@@ -27,7 +27,6 @@
         }
         
     })
-
     
     const formData = reactive({
         id: values.id,
@@ -36,14 +35,18 @@
         photo: values.photo
     })
 
-    
-
-    import { required, helpers} from "@vuelidate/validators";
+    import { required, maxLength, helpers} from "@vuelidate/validators";
 
     const rules = computed(() => {
         return {
-            title: { required: helpers.withMessage('Preencha o título', required)},
-            link: { required: helpers.withMessage('Preencha o link', required)}
+            title: { 
+                required: helpers.withMessage('Preencha o título', required),
+                maxLength: helpers.withMessage('Digite no máximo 50 caracteres', maxLength(50))
+            },
+            link: { 
+                required: helpers.withMessage('Preencha o link', required),
+                maxLength: helpers.withMessage('Digite no máximo 50 caracteres', maxLength(50))
+            }
         }
     })
 
@@ -70,10 +73,10 @@
                     'Authorization': 'Bearer ' + localStorage.getItem('token')
                 }
             }
-            ).then((response) => {
-                console.log(response)
-            }).catch((error) => {
-                console.log(error)
+            ).then(() => {
+                appStore.setAlert(true, 'success', "Produto editado com sucesso.");
+            }).catch(() => {
+                appStore.setAlert(true, 'error', "Houve um erro ao editar o produto.");
             })
         }
     }

@@ -1,56 +1,59 @@
 <script setup>
     import { useAppStore } from "~/store/appStore";
-
     const appStore = useAppStore();
-    const age = ref();
-    const height = ref();
-    const weight = ref();
-    const sex = ref("");
-    const results = ref(false);
 
-    const tmb = computed(() => {
-        if(age.value && height.value && weight.value && sex.value){
-            results.value = true;
-            if(sex.value == "MALE")
-                return Math.round(88.362 + (13.397 * weight.value) + (4.799 * height.value) - (5.677 * age.value));
-            return Math.round(447.593 + (9.247 * weight.value) + (3.098 * height.value) - (4.33 * age.value));
-        }
-        return 0;
+    const formData = reactive({ 
+        age: 0,
+        height: 0,
+        weight: 0,
+        sex: ''
+    })
+
+    const quantityMacros = reactive({
+        carbs: 0,
+        fat: 0,
+        protein: 0
     });
 
-    const goal = ref("");
+    const goal = ref('');
+    const results = ref(false);
+
     const macros = computed(() => {
-        if(weight.value && goal.value)
+        if(formData.weight && goal.value)
             return true;
         return false;
     });
 
+    const recommendedKcal = computed(() => {
+        return Math.round((quantityMacros.carbs * 4 * formData.weight) +
+         (quantityMacros.protein * 4 * formData.weight) + (quantityMacros.fat * 9 * formData.weight))
+    });
+
+    const tmb = computed(() => {
+        if(formData.age && formData.height && formData.weight && formData.sex){
+            results.value = true;
+            if(formData.sex == "MALE")
+                return Math.round(88.362 + (13.397 * formData.weight) + (4.799 * formData.height) - (5.677 * formData.age));
+            return Math.round(447.593 + (9.247 * formData.weight) + (3.098 * formData.height) - (4.33 * formData.age));
+        }
+        return 0;
+    });
+
     watch(goal, () => {
-        if(!weight.value){
-            appStore.alert.type = "alert-warning";
-            appStore.alert.message = "Preencha o seu peso para receber a sugestão.";
-            appStore.alert.icon = "material-symbols:warning";
-            appStore.alert.show = true;
+        if(!formData.weight){
+            appStore.setAlert(true, 'warning', 'Preencha o seu peso para receber a sugestão.');
         }
 
-        fat.value = 0.7;
-        protein.value = 1.8;
+        quantityMacros.fat = 0.6;
+        quantityMacros.protein = 2;
 
         if(goal.value == "cutting")
-            carbs.value = 3;
+            quantityMacros.carbs = 2.5;
         else if (goal.value == "bulking")
-            carbs.value = 4;
+            quantityMacros.carbs = 3.5;
         else //maintenance
-            carbs.value = 3.5;
+            quantityMacros.carbs = 3;
     })
-
-    const carbs = ref(0);
-    const fat = ref(0);
-    const protein = ref(0);
-
-    const recommendedKcal = computed(() => {
-        return Math.round((carbs.value * 4 * weight.value) + (protein.value * 4 * weight.value) + (fat.value * 9 * weight.value))
-    });
 
 </script>
 
@@ -58,43 +61,43 @@
     <NuxtLayout name="main">
         <template #content>
             <div class="pt-24 px-4 pb-10">
-                <h1 class="text-center">Calculadora</h1>
+                <h1 class="text-center text-neutral-50">Calculadora</h1>
                 <h2 class="text-center font-semibold uppercase text-sm pb-6">
                     macros, taxa metabólica basal (tmb) e gasto energético total (get)
                 </h2>
                 <div class="flex justify-center">
                     <div class="md:w-4/5 lg:w-3/5">
-                        <h3>Para calcular a TMB e o GET preencha os campos a seguir.</h3>
+                        <h3 class="font-medium text-neutral-50">Para calcular a TMB e o GET preencha os campos a seguir.</h3>
                         <form action="" class="py-4">
-                            <Input name="age" type="number" label="Qual a sua idade?" placeholder="Digite aqui sua idade" v-model="age" @update:model-value="age = $event" class="pb-2" />
-                            <Input name="height" type="number" label="Qual a sua altura? (cm)" placeholder="Digite aqui sua altura" v-model="height" @update:model-value="height = $event" class="pb-2" />
-                            <Input id="weight" name="weight" type="number" label="Qual o seu peso?" placeholder="Digite aqui seu peso" v-model="weight" @update:model-value="weight = $event" class="pb-2"/>
+                            <Input name="age" type="number" label="Qual a sua idade?" placeholder="Digite aqui sua idade" @update:model-value="formData.age = $event" class="pb-2" />
+                            <Input name="height" type="number" label="Qual a sua altura? (cm)" placeholder="Digite aqui sua altura" @update:model-value="formData.height = $event" class="pb-2" />
+                            <Input id="weight" name="weight" type="number" label="Qual o seu peso?" placeholder="Digite aqui seu peso" @update:model-value="formData.weight = $event" class="pb-2"/>
                             <div class="md:max-w-xs">
                                 <label class="label">
-                                    <span class="label-text text-neutral-600">Qual o seu sexo?</span>
+                                    <span class="label-text text-neutral-50 font-semibold">Qual o seu sexo?</span>
                                 </label>
                                 <div class="form-control">
                                     <label class="label cursor-pointer">
-                                        <span class="label-text text-base-200">Feminino</span> 
-                                        <input type="radio" class="radio checked:bg-base-200 border-neutral-600" value="FEMALE" v-model="sex" />
+                                        <span class="label-text">Feminino</span> 
+                                        <input type="radio" class="radio radio-primary" value="FEMALE" v-model="formData.sex" />
                                     </label>
                                 </div>
                                 <div class="form-control">
                                     <label class="label cursor-pointer">
-                                        <span class="label-text text-base-200">Masculino</span> 
-                                        <input type="radio" class="radio checked:bg-base-200 border-neutral-600" value="MALE" v-model="sex"/>
+                                        <span class="label-text">Masculino</span> 
+                                        <input type="radio" class="radio radio-primary" value="MALE" v-model="formData.sex"/>
                                     </label>
                                 </div>
                             </div>
                         </form>
-                        <div v-show="results">
-                            <h2 class="text-center">Taxa metabólica basal (TMB)</h2>
-                            <p class="text-center py-4 text-lg"><span class="text-8xl font-bold">{{ tmb }}</span>kcal</p>
-                            <p class="text-neutral-500 text-justify">A taxa metabólica basal corresponde ao quanto de calorias
+                        <div v-show="results" class="pb-4">
+                            <h2 class="text-center text-neutral-50">Taxa metabólica basal (TMB)</h2>
+                            <p class="text-center py-4 text-lg text-neutral-50"><span class="text-8xl font-bold">{{ tmb }}</span>kcal</p>
+                            <p class="text-justify">A taxa metabólica basal corresponde ao quanto de calorias
                                 você gasta apenas em repouso, sem contabilizar nenhuma atividade do seu dia.
                             </p>
-                            <h2 class="text-center py-4">Gasto energético total (GET)</h2>
-                            <p class="text-neutral-500 pb-4 text-justify">O gasto energético total corresponde ao quanto de calorias
+                            <h2 class="text-center py-4 text-white">Gasto energético total (GET)</h2>
+                            <p class="pb-4 text-justify">O gasto energético total corresponde ao quanto de calorias
                                 você gasta somando a TMB + seu nível de atividade. Os níveis de atividade são apenas estimativas,
                                 sendo que a mensuração do esforço realizado é subjetivo.
                             </p>
@@ -102,7 +105,7 @@
                             <div class="overflow-x-auto">
                                 <table class="table">
                                     <thead>
-                                        <tr class="text-neutral-900">
+                                        <tr class="text-neutral-50">
                                             <th></th>
                                             <th>Nível de atividade</th>
                                             <th>Calorias</th>
@@ -128,9 +131,8 @@
                                 </table>
                             </div>
                         </div>
-                        
-                        <h2 class="text-center py-4">Sugestão de macronutrientes</h2>
-                        <p class="text-neutral-500 pb-4 text-justify">A sugestão de macros possui valores conservadores para
+                        <h2 class="text-center py-4 text-neutral-50">Sugestão de macronutrientes</h2>
+                        <p class="pb-4 text-justify">A sugestão de macros possui valores conservadores para
                             um início de dieta, conforme progressão deve-se atualizar a quantidade em especial 
                             dos carboidratos. Ela leva em conta apenas o peso do indivíduo e seu objetivo. Dessa forma,
                             você pode realizar a comparação com os valores indicados pela TMB e GET e ajustar caso ache
@@ -143,12 +145,12 @@
                             <input v-model="goal" class="btn w-full md:btn-wide" type="radio" value="bulking" aria-label="Ganhar massa" />
                         </div>
                         <div v-show="macros">
-                            <h4 class="text-sm font-semibold pb-2">Carboidratos - {{ carbs }}g/kg ({{ Math.round(weight * carbs) }} g)</h4>
-                            <input type="range" min="0" max="8" step="0.5" v-model="carbs" class="range range-warning" />
-                            <h4 class="text-sm font-semibold pb-2">Gordura - {{ fat }}g/kg ({{ Math.round(weight * fat) }} g)</h4>
-                            <input type="range" min="0" max="8" step="0.1" v-model="fat" class="range range-accent" />
-                            <h4 class="text-sm font-semibold pb-2">Proteína - {{ protein }}g/kg ({{ Math.round(weight * protein) }} g)</h4>
-                            <input type="range" min="0" max="8" step="0.25" v-model="protein" class="range range-error" />
+                            <h4 class="text-sm font-semibold pb-2">Carboidratos - {{ quantityMacros.carbs }}g/kg ({{ Math.round(formData.weight * quantityMacros.carbs) }} g)</h4>
+                            <input type="range" min="0" max="8" step="0.5" v-model="quantityMacros.carbs" class="range range-warning" />
+                            <h4 class="text-sm font-semibold pb-2">Gordura - {{ quantityMacros.fat }}g/kg ({{ Math.round(formData.weight * quantityMacros.fat) }} g)</h4>
+                            <input type="range" min="0" max="8" step="0.1" v-model="quantityMacros.fat" class="range range-accent" />
+                            <h4 class="text-sm font-semibold pb-2">Proteína - {{ quantityMacros.protein }}g/kg ({{ Math.round(formData.weight * quantityMacros.protein) }} g)</h4>
+                            <input type="range" min="0" max="8" step="0.25" v-model="quantityMacros.protein" class="range range-error" />
                             <p class="text-center py-4 text-lg"><span class="text-8xl font-bold">{{ recommendedKcal }}</span>kcal</p>
                         </div>
                     </div>

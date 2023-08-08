@@ -1,4 +1,10 @@
 <script setup>
+    import { required, maxLength, helpers} from "@vuelidate/validators";
+    import { useVuelidate  } from "@vuelidate/core";
+
+    const v$ = useVuelidate(rules, formData);
+    const photoFilename = ref("");
+
     const submitForm = async () => {
         v$.value.$validate();
 
@@ -16,15 +22,13 @@
                     'Authorization': 'Bearer ' + localStorage.getItem('token')
                 }
             }
-            ).then((response) => {
-                console.log(response)
-            }).catch((error) => {
-                console.log(error)
+            ).then(() => {
+                appStore.setAlert(true, 'success', "Produto adicionado com sucesso.");
+            }).catch(() => {
+                appStore.setAlert(true, 'error', "Houve um erro ao adicionar o produto.");
             })
         }
     }
-
-    const photoFilename = ref("");
 
     const changeFileInput = (event) => {
         photoFilename.value = event.target.files[0].name;
@@ -37,25 +41,26 @@
         photo: ''
     })
 
-    import { required, helpers} from "@vuelidate/validators";
-
     const rules = computed(() => {
         return {
-            title: { required: helpers.withMessage('Preencha o título', required)},
-            link: { required: helpers.withMessage('Preencha o link', required)},
+            title: { 
+                required: helpers.withMessage('Preencha o título', required),
+                maxLength: helpers.withMessage('Digite no máximo 50 caracteres', maxLength(50))
+            },
+            link: { 
+                required: helpers.withMessage('Preencha o link', required),
+                maxLength: helpers.withMessage('Digite no máximo 50 caracteres', maxLength(50))
+            },
             photo: { required: helpers.withMessage('Selecione a foto', required)}
         }
     })
-
-    import { useVuelidate  } from "@vuelidate/core";
-    const v$ = useVuelidate(rules, formData);
 </script>
 
 <template>
     <NuxtLayout name="main">
         <template #content>
             <div class="pt-24 px-4 pb-10">
-                <h1 class="text-center pb-6">Cadastrar produto</h1>
+                <h1 class="text-center pb-6">Adicionar produto</h1>
                 <div class="flex justify-center">
                     <div class="md:w-4/5 lg:w-3/5">
                         <form action="">
@@ -77,7 +82,7 @@
                                 <input type="file" id="photo" name="photo" class="invisible" @change="changeFileInput" />
                             </div>
                             <div class="flex justify-center">
-                                <button type="button" class="btn btn-accent btn-wide" @click="submitForm">Cadastrar</button>
+                                <button type="button" class="btn btn-accent btn-wide" @click="submitForm">Adicionar</button>
                             </div>
                         </form>
                     </div>

@@ -12,7 +12,6 @@
                 <a href="https://chat.whatsapp.com/IKsrJ3xScsnApKY4eqQpeE" target="_blank" class="btn btn-secondary btn-wide flex justify-around">
                     <span class="text-white">Entrar agora</span>
                     <Icon class="w-8 h-auto" name="logos:whatsapp-icon" />
-                 
                 </a>
             </div>
         </div>

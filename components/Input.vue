@@ -17,12 +17,12 @@
 <template>
     <div class="form-control w-full" :class="props.size ? props.size : 'md:max-w-xs'">
         <label class="label">
-            <span class="label-text text-neutral-600">{{ props.label }}</span>
+            <span class="label-text text-white font-semibold">{{ props.label }}</span>
         </label>
         <input :value="props.value" :name="props.name" :type="props.type" :placeholder="props.placeholder" :disabled="props.disabled"
             @input="$emit('update:modelValue', $event.target.value)"
             class="input  placeholder:text-sm border border-neutral-300
-             text-neutral-500 focus:outline-none focus:border-secondary disabled:bg-neutral-50 disabled:border-neutral-100 disabled:text-neutral-400" />
+             text-neutral-content focus:outline-none focus:border-secondary disabled:bg-neutral-50 disabled:border-neutral-100 disabled:text-neutral-400" />
         <span>{{ props.error }}</span>
     </div>
 </template>

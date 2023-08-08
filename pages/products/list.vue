@@ -1,5 +1,9 @@
 <script setup>
+    import { useAppStore } from 'store/appStore';
+
+    const appStore = useAppStore();
     const products = ref([]);
+    const deleteProductId = ref(''); 
 
     onMounted(async () => {    
         const data = await useFetch('http://localhost:8080/api/products',
@@ -11,30 +15,28 @@
         products.value = data.value;
     })
 
-    const deleteProductId = ref('');    
-
     const showDialogDeleteProduct = (id) => {
         deleteProductId.value = id;
         const deleteDialog = document.getElementById('delete_dialog');
         deleteDialog.showModal();
     }
-
     const submitDeleteProduct = async () => {
 
         await $fetch(`http://localhost:8080/api/products/${deleteProductId.value}`,
-            {
-                method: 'DELETE',
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem('token')
-                }
+        {
+            method: 'DELETE',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
             }
-            ).then((response) => {
-                console.log(response);
-                products.value = products.value.filter(product => product.id != deleteProductId.value);
-                deleteProductId.value = '';
-            }).catch((error) => {
-                console.log(error)
-            })
+        }
+        ).then(() => {
+            products.value = products.value.filter(product => product.id != deleteProductId.value);
+            deleteProductId.value = '';
+            appStore.setAlert(true, 'success', "Produto excluído com sucesso.");
+
+        }).catch(() => {
+            appStore.setAlert(true, 'error', "Houve um erro na tentativa de exclusão.")
+        })
     }
 </script>
 

@@ -2,8 +2,8 @@
     <NuxtLayout name="main">
         <template #content>
             <Home />
-            <Products />
-            <Group />
+            <HomeProducts />
+            <HomeGroup />
         </template>
     </NuxtLayout>
 </template>
