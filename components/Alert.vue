@@ -21,14 +21,14 @@
                     progress.value = 0;
                     appStore.setAlert(false, '', '');
                 }
-            }, 50)
+            }, 30)
         }
     })
 </script>
 
 <template>
     <div class="flex justify-center" v-show="appStore.alert.show">
-        <div class="fixed bottom-4 w-11/12 md:w-4/5 lg:w-3/5 xl:w-2/5">
+        <div class="fixed z-50 bottom-4 w-11/12 md:w-4/5 lg:w-3/5 xl:w-2/5">
             <div class="alert rounded-md" 
                 :class="appStore.alert.type == 'success'? 'alert-success':
                     appStore.alert.type == 'warning'? 'alert-warning': 

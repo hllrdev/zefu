@@ -15,14 +15,8 @@
         protein: 0
     });
 
-    const goal = ref('');
+    const goal = ref(null);
     const results = ref(false);
-
-    const macros = computed(() => {
-        if(formData.weight && goal.value)
-            return true;
-        return false;
-    });
 
     const recommendedKcal = computed(() => {
         return Math.round((quantityMacros.carbs * 4 * formData.weight) +
@@ -39,13 +33,19 @@
         return 0;
     });
 
-    watch(goal, () => {
-        if(!formData.weight){
-            appStore.setAlert(true, 'warning', 'Preencha o seu peso para receber a sugestão.');
-        }
+    const imc = () => {
+        const height = formData.height / 100;
+        return formData.weight / (height * height);
+    }
+
+    const macrosCalc = () => {
+        console.log(imc())
+        if(imc() >= 30)
+            quantityMacros.protein = 1.6;
+        else
+            quantityMacros.protein = 2;
 
         quantityMacros.fat = 0.6;
-        quantityMacros.protein = 2;
 
         if(goal.value == "cutting")
             quantityMacros.carbs = 2.5;
@@ -53,6 +53,25 @@
             quantityMacros.carbs = 3.5;
         else //maintenance
             quantityMacros.carbs = 3;
+    }
+
+    watch(goal, () => {
+        
+        if((!formData.weight || !formData.height || !formData.age || !formData.sex)){
+            appStore.setAlert(true, 'warning', 'Preencha todos os campos para receber a sugestão.');
+            return;
+        }
+
+        macrosCalc();
+    })
+
+    const macrosSuggestion = computed(() => {
+        console.log('aqui macros')
+        if(goal.value && formData.weight && formData.height && formData.age && formData.sex){
+            macrosCalc();
+            return true;
+        }
+        return false;
     })
 
 </script>
@@ -144,7 +163,7 @@
                             <input v-model="goal" class="btn w-full md:btn-wide" type="radio" value="maintenance" aria-label="Recomposição corporal/Manutenção" />
                             <input v-model="goal" class="btn w-full md:btn-wide" type="radio" value="bulking" aria-label="Ganhar massa" />
                         </div>
-                        <div v-show="macros">
+                        <div v-show="macrosSuggestion">
                             <h4 class="text-sm font-semibold pb-2">Carboidratos - {{ quantityMacros.carbs }}g/kg ({{ Math.round(formData.weight * quantityMacros.carbs) }} g)</h4>
                             <input type="range" min="0" max="8" step="0.5" v-model="quantityMacros.carbs" class="range range-warning" />
                             <h4 class="text-sm font-semibold pb-2">Gordura - {{ quantityMacros.fat }}g/kg ({{ Math.round(formData.weight * quantityMacros.fat) }} g)</h4>
