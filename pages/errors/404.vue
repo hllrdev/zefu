@@ -3,7 +3,7 @@
         <template #title>
             <div class="text-center">
                 <h1>Erro 404</h1>
-                <h3>O recurso solicitado não foi encontrado.</h3>
+                <p class="font-semibold">O recurso solicitado não foi encontrado.</p>
             </div>
         </template>
     </NuxtLayout>
