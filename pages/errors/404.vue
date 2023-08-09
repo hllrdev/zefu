@@ -1,9 +1,10 @@
 <template>
-    <NuxtLayout name="main">
-        <template #content>
-            <div class="h-20 bg-blue-300 pt-24 md:pt-14">
-                <span class="text-black">404, recurso não encontrado</span>
-            </div> 
+    <NuxtLayout name="error">
+        <template #title>
+            <div class="text-center">
+                <h1>Erro 404</h1>
+                <h3>O recurso solicitado não foi encontrado.</h3>
+            </div>
         </template>
     </NuxtLayout>
 </template>

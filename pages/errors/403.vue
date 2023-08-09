@@ -1,9 +1,10 @@
 <template>
-    <NuxtLayout name="main">
-        <template #content>
-            <div class="h-20 bg-purple-300 pt-24 md:pt-14">
-                <span class="text-black">403, vc não tem permissao</span>
-            </div> 
+    <NuxtLayout name="error">
+        <template #title>
+            <div class="text-center">
+                <h1>Erro 403</h1>
+                <h3>Você não possui permissão para acessar essa página</h3>
+            </div>
         </template>
     </NuxtLayout>
 </template>

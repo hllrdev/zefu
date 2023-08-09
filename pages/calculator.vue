@@ -80,20 +80,20 @@
     <NuxtLayout name="main">
         <template #content>
             <div class="pt-24 px-4 pb-10">
-                <h1 class="text-center text-neutral-50">Calculadora</h1>
+                <h1 class="text-center">Calculadora</h1>
                 <h2 class="text-center font-semibold uppercase text-sm pb-6">
                     macros, taxa metabólica basal (tmb) e gasto energético total (get)
                 </h2>
                 <div class="flex justify-center">
                     <div class="md:w-4/5 lg:w-3/5">
-                        <h3 class="font-medium text-neutral-50">Para calcular a TMB e o GET preencha os campos a seguir.</h3>
+                        <h3>Para calcular a TMB e o GET preencha os campos a seguir.</h3>
                         <form action="" class="py-4">
                             <Input name="age" type="number" label="Qual a sua idade?" placeholder="Digite aqui sua idade" @update:model-value="formData.age = $event" class="pb-2" />
                             <Input name="height" type="number" label="Qual a sua altura? (cm)" placeholder="Digite aqui sua altura" @update:model-value="formData.height = $event" class="pb-2" />
                             <Input id="weight" name="weight" type="number" label="Qual o seu peso?" placeholder="Digite aqui seu peso" @update:model-value="formData.weight = $event" class="pb-2"/>
                             <div class="md:max-w-xs">
                                 <label class="label">
-                                    <span class="label-text text-neutral-50 font-semibold">Qual o seu sexo?</span>
+                                    <span class="label-text font-semibold">Qual o seu sexo?</span>
                                 </label>
                                 <div class="form-control">
                                     <label class="label cursor-pointer">
@@ -110,7 +110,7 @@
                             </div>
                         </form>
                         <div v-show="results" class="pb-4">
-                            <h2 class="text-center text-neutral-50">Taxa metabólica basal (TMB)</h2>
+                            <h2 class="text-center">Taxa metabólica basal (TMB)</h2>
                             <p class="text-center py-4 text-lg text-neutral-50"><span class="text-8xl font-bold">{{ tmb }}</span>kcal</p>
                             <p class="text-justify">A taxa metabólica basal corresponde ao quanto de calorias
                                 você gasta apenas em repouso, sem contabilizar nenhuma atividade do seu dia.
@@ -150,7 +150,7 @@
                                 </table>
                             </div>
                         </div>
-                        <h2 class="text-center py-4 text-neutral-50">Sugestão de macronutrientes</h2>
+                        <h2 class="text-center py-4">Sugestão de macronutrientes</h2>
                         <p class="pb-4 text-justify">A sugestão de macros possui valores conservadores para
                             um início de dieta, conforme progressão deve-se atualizar a quantidade em especial 
                             dos carboidratos. Ela leva em conta apenas o peso do indivíduo e seu objetivo. Dessa forma,
