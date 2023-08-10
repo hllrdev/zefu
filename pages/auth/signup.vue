@@ -33,7 +33,7 @@
                 minLength: helpers.withMessage('É preciso no minímo 6 caracteres', minLength(6))
             },
             confirmPassword: { 
-                required: helpers.withMessage('Preencha o confirmar senha', required), 
+                required: helpers.withMessage('Confirme a senha', required), 
                 sameAs: helpers.withMessage('As senhas são diferentes', sameAs(formData.password))}
         }
     })

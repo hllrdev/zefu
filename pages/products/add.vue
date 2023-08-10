@@ -7,13 +7,12 @@
 
     const submitForm = async () => {
         v$.value.$validate();
-
-        const form = new FormData();
-        form.append('title', formData.title);
-        form.append('link', formData.link);
-        form.append('photo', formData.photo);
-
         if(!v$.value.$error){
+            const form = new FormData();
+            form.append('title', formData.title);
+            form.append('link', formData.link);
+            form.append('photo', formData.photo);
+
             await $fetch('http://localhost:8080/api/products',
             {
                 method: 'POST',
