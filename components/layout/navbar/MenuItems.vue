@@ -24,7 +24,7 @@
         <li class="md:hidden mt-4">
             <div v-show="!props.authenticated">
                 <NuxtLink to="/auth/signin"> 
-                    <button class="btn btn-secondary btn-wide">Entrar</button>
+                    <button class="btn btn-secondary text-neutral-50 btn-wide">Entrar</button>
                 </NuxtLink>
             </div>
         </li>

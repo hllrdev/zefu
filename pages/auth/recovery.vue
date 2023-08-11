@@ -62,7 +62,7 @@
                         <Input name="email" type="email" label="E-mail" placeholder="Digite aqui seu e-mail" @update:model-value="formData.email = $event" />
                         <span class="text-error font-medium text-xs" v-if="v$.email.$error">{{ v$.email.$errors[0].$message }}</span>
                     </div>
-                    <button type="button" class="btn btn-secondary w-full" @click="submitForm">Recuperar</button>
+                    <button type="button" class="btn btn-secondary text-neutral-50 w-full" @click="submitForm">Recuperar</button>
                 </form>
                 <p class="text-sm text-center pb-4">Lembrou a senha? <NuxtLink to="/auth/signin"><span class="font-semibold ml-2">Entrar</span></NuxtLink></p>
                 <div v-show="wait" class="flex flex-col items-center">

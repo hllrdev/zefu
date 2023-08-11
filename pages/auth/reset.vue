@@ -70,7 +70,7 @@
                         <Input name="confirmPassword" type="password" label="Confirmar senha" placeholder="Digite a senha novamente" @update:model-value="formData.confirmPassword = $event"/>
                         <span class="text-error font-medium text-xs" v-if="v$.confirmPassword.$error">{{ v$.confirmPassword.$errors[0].$message }}</span>
                     </div>
-                    <button type="button" class="btn btn-secondary w-full" @click="submitForm">Resetar</button>
+                    <button type="button" class="btn btn-secondary w-full text-neutral-50" @click="submitForm">Resetar</button>
                 </form>
             </div>
         </template>

@@ -25,7 +25,7 @@
                 </div>
                 <div v-show="!authStore.auth.authenticated">
                     <NuxtLink to="/auth/signin">
-                        <button class="btn btn-secondary btn-sm text-xs px-10">Entrar</button>
+                        <button class="btn btn-secondary btn-sm text-xs px-10 text-neutral-50">Entrar</button>
                     </NuxtLink>
                 </div>
             </div>

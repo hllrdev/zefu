@@ -52,11 +52,11 @@
                         </div>
                     </div>
                     <div class="flex justify-center flex-col">
-                        <button type="button" class="btn btn-secondary w-full mb-4" @click="submitForm">Entrar</button>
-                        <NuxtLink class="btn btn-neutral">
+                        <button type="button" class="btn btn-secondary text-neutral-50 w-full mb-4" @click="submitForm">Entrar</button>
+                        <!-- <NuxtLink class="btn btn-neutral">
                             <Icon class="w-5 h-auto" name="flat-color-icons:google"></Icon> 
                             Entrar com Google
-                        </NuxtLink>
+                        </NuxtLink> -->
                     </div>
                 </form>
                 <p class="text-sm text-center"> 

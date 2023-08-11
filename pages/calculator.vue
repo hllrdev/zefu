@@ -39,7 +39,6 @@
     }
 
     const macrosCalc = () => {
-        console.log(imc())
         if(imc() >= 30)
             quantityMacros.protein = 1.6;
         else
@@ -66,7 +65,6 @@
     })
 
     const macrosSuggestion = computed(() => {
-        console.log('aqui macros')
         if(goal.value && formData.weight && formData.height && formData.age && formData.sex){
             macrosCalc();
             return true;
