@@ -1,12 +1,15 @@
 <script setup>
     import { useAppStore } from 'store/appStore';
 
+    const runtimeConfig = useRuntimeConfig();
+    const API_URL = runtimeConfig.public.API_URL;
+
     const appStore = useAppStore();
     const products = ref([]);
     const deleteProductId = ref(''); 
 
     onMounted(async () => {    
-        const data = await useFetch('http://localhost:8080/api/products',
+        const data = await useFetch(`${API_URL}/products`,
         {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -22,7 +25,7 @@
     }
     const submitDeleteProduct = async () => {
 
-        await $fetch(`http://localhost:8080/api/products/${deleteProductId.value}`,
+        await $fetch(`${API_URL}/products/${deleteProductId.value}`,
         {
             method: 'DELETE',
             headers: {
@@ -76,7 +79,7 @@
                                                 <div class="flex items-center">
                                                     <div class="avatar">
                                                         <div class="mask mask-squircle w-12 h-12">
-                                                            <img :src="'http://localhost:8080/api/static' + product.photo" alt="Photo product" />
+                                                            <img :src="`${API_URL}/static${product.photo}`" alt="Photo product" />
                                                         </div>
                                                     </div>
                                                     <span>{{ product.title }}</span>

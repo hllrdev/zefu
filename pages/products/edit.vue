@@ -65,7 +65,7 @@
             form.append('title', formData.title);
             form.append('link', formData.link);
 
-            await $fetch(`http://localhost:8080/api/products/${formData.id}`,
+            await $fetch(`${API_URL}/products/${formData.id}`,
             {
                 method: 'PUT',
                 body: form,
@@ -108,7 +108,7 @@
                                 <input type="file" id="photo" name="photo" class="invisible" @change="changeFileInput" />
                             </div>
                             <div class="flex justify-center pb-6 pt-2">
-                                <img class="w-72" :src="imagePreview ? imagePreview  :  'http://localhost:8080/api/static' + initialImage" />
+                                <img class="w-72" :src="imagePreview ? imagePreview  : `${API_URL}/static${initialImage}`" />
                             </div>
                             <div class="flex justify-center">
                                 <button type="button" class="btn btn-accent btn-wide" @click="submitForm">Editar</button>

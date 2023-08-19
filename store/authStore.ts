@@ -17,6 +17,9 @@ export const useAuthStore = defineStore('authStore', () => {
     const appStore = useAppStore();
     const router = useRouter();
 
+    const runtimeConfig = useRuntimeConfig();
+    const API_URL = runtimeConfig.public.API_URL;
+
     const auth = reactive({
         user: {},
         authenticated: false
@@ -24,7 +27,7 @@ export const useAuthStore = defineStore('authStore', () => {
 
     const signInUser = async ({email, password}:UserSignInInterface) => {
 
-        await useFetch('http://localhost:8080/api/auth/signin', {
+        await useFetch(`${API_URL}/auth/signin`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: {
@@ -54,7 +57,7 @@ export const useAuthStore = defineStore('authStore', () => {
 
     const signUpUser = async ({name, email, password}:UserSignUpInterface) => {
     
-        await useFetch('http://localhost:8080/api/auth/signup', {
+        await useFetch(`${API_URL}/auth/signup`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: {

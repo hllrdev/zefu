@@ -3,11 +3,14 @@
     const route = useRoute();
     const router = useRouter();
 
+    const runtimeConfig = useRuntimeConfig();
+    const API_URL = runtimeConfig.public.API_URL;
+
     const submitForm = async () => {
         v$.value.$validate();
         if(!v$.value.$error){
             const password = formData.password;
-            await useFetch('http://localhost:8080/api/auth/reset', {
+            await useFetch(`${API_URL}/auth/reset`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json', 

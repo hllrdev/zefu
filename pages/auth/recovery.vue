@@ -4,12 +4,15 @@
     const wait = ref(false);
     const router = useRouter();
 
+    const runtimeConfig = useRuntimeConfig();
+    const API_URL = runtimeConfig.public.API_URL;
+
     const submitForm= async () => {
         v$.value.$validate();
         if(!v$.value.$error){
             wait.value = true;
             const email = formData.email;
-            await useFetch('http://localhost:8080/api/auth/recovery', {
+            await useFetch(`${API_URL}/auth/recovery`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: {

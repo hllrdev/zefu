@@ -5,6 +5,9 @@
     const v$ = useVuelidate(rules, formData);
     const photoFilename = ref("");
 
+    const runtimeConfig = useRuntimeConfig();
+    const API_URL = runtimeConfig.public.API_URL;
+
     const submitForm = async () => {
         v$.value.$validate();
         if(!v$.value.$error){
@@ -13,7 +16,7 @@
             form.append('link', formData.link);
             form.append('photo', formData.photo);
 
-            await $fetch('http://localhost:8080/api/products',
+            await $fetch(`${API_URL}/products`,
             {
                 method: 'POST',
                 body: form,

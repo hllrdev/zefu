@@ -1,13 +1,16 @@
-import { useAuthStore } from "~/store/authStore"
+import { useAuthStore } from "~/store/authStore";
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
+
     if (process.server) return
 
     if (process.client) {
+        const runtimeConfig = useRuntimeConfig();
+        const API_URL = runtimeConfig.public.API_URL;
         const authStore = useAuthStore();
         const token = localStorage.getItem('token');
         if(!authStore.auth.authenticated && token){
-            await $fetch('http://localhost:8080/api/users/authenticated',
+            await $fetch(`${API_URL}/users/authenticated`,
                 {
                     method: 'GET',
                     headers: {

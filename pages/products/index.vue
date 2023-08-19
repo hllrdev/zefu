@@ -1,8 +1,11 @@
 <script setup>
     import { useAuthStore } from '~/store/authStore';
 
+    const runtimeConfig = useRuntimeConfig();
+    const API_URL = runtimeConfig.public.API_URL;
+
     // const scrollControl = ref(0);
-    const {data:products} = await useFetch('http://localhost:8080/api/products');
+    const {data:products} = await useFetch(`${API_URL}/products`);
     const loading = ref(false);
 
     // onMounted(()=>{
