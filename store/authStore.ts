@@ -119,4 +119,4 @@ export const useAuthStore = defineStore('authStore', () => {
         signInUser, signUpUser
     }
 
-});
+}); 
