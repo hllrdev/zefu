@@ -1,5 +1,5 @@
 <script setup>
-    import { useAppStore } from 'store/appStore';
+    import { useAppStore } from '~/store/appStore';
 
     const runtimeConfig = useRuntimeConfig();
     const API_URL = runtimeConfig.public.API_URL;
