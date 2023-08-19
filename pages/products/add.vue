@@ -2,6 +2,26 @@
     import { required, maxLength, helpers} from "@vuelidate/validators";
     import { useVuelidate  } from "@vuelidate/core";
 
+    const formData = reactive({
+        title: '',
+        link: '',
+        photo: ''
+    })
+
+    const rules = computed(() => {
+        return {
+            title: { 
+                required: helpers.withMessage('Preencha o título', required),
+                maxLength: helpers.withMessage('Digite no máximo 50 caracteres', maxLength(50))
+            },
+            link: { 
+                required: helpers.withMessage('Preencha o link', required),
+                maxLength: helpers.withMessage('Digite no máximo 50 caracteres', maxLength(50))
+            },
+            photo: { required: helpers.withMessage('Selecione a foto', required)}
+        }
+    })
+
     const v$ = useVuelidate(rules, formData);
     const photoFilename = ref("");
 
@@ -37,25 +57,7 @@
         formData.photo = event.target.files[0];
     }
 
-    const formData = reactive({
-        title: '',
-        link: '',
-        photo: ''
-    })
-
-    const rules = computed(() => {
-        return {
-            title: { 
-                required: helpers.withMessage('Preencha o título', required),
-                maxLength: helpers.withMessage('Digite no máximo 50 caracteres', maxLength(50))
-            },
-            link: { 
-                required: helpers.withMessage('Preencha o link', required),
-                maxLength: helpers.withMessage('Digite no máximo 50 caracteres', maxLength(50))
-            },
-            photo: { required: helpers.withMessage('Selecione a foto', required)}
-        }
-    })
+    
 </script>
 
 <template>
