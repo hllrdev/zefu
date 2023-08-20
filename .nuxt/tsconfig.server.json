@@ -1,0 +1,67 @@
+{
+  "compilerOptions": {
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "jsx": "preserve",
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment",
+    "paths": {
+      "#imports": [
+        "/home/heuller/Documents/Projects/zefu/client/.nuxt/types/nitro-imports"
+      ],
+      "#paths": [
+        "/home/heuller/Documents/Projects/zefu/client/node_modules/nuxt/dist/core/runtime/nitro/paths"
+      ],
+      "~": [
+        "/home/heuller/Documents/Projects/zefu/client"
+      ],
+      "~/*": [
+        "/home/heuller/Documents/Projects/zefu/client/*"
+      ],
+      "@": [
+        "/home/heuller/Documents/Projects/zefu/client"
+      ],
+      "@/*": [
+        "/home/heuller/Documents/Projects/zefu/client/*"
+      ],
+      "~~": [
+        "/home/heuller/Documents/Projects/zefu/client"
+      ],
+      "~~/*": [
+        "/home/heuller/Documents/Projects/zefu/client/*"
+      ],
+      "@@": [
+        "/home/heuller/Documents/Projects/zefu/client"
+      ],
+      "@@/*": [
+        "/home/heuller/Documents/Projects/zefu/client/*"
+      ],
+      "assets": [
+        "/home/heuller/Documents/Projects/zefu/client/assets"
+      ],
+      "assets/*": [
+        "/home/heuller/Documents/Projects/zefu/client/assets/*"
+      ],
+      "public": [
+        "/home/heuller/Documents/Projects/zefu/client/public"
+      ],
+      "public/*": [
+        "/home/heuller/Documents/Projects/zefu/client/public/*"
+      ],
+      "pinia": [
+        "/home/heuller/Documents/Projects/zefu/client/node_modules/pinia/dist/pinia"
+      ]
+    }
+  },
+  "include": [
+    "/home/heuller/Documents/Projects/zefu/client/.nuxt/types/nitro-nuxt.d.ts",
+    "./types/nitro.d.ts",
+    "../**/*",
+    "../server/**/*"
+  ]
+}
