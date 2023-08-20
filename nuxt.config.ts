@@ -14,5 +14,13 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  modules: ['nuxt-icon', '@pinia/nuxt']
+  modules: ['nuxt-icon', '@pinia/nuxt'],
+  app: {
+    head: {
+      title: 'Zefu - Site oficial',
+      meta: [
+        { 'http-equiv': 'Content-Security-Policy', content: 'upgrade-insecure-requests' }
+      ]
+    }
+  }
 })
