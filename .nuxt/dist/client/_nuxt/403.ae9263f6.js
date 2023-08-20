@@ -1,1 +1,0 @@
-import{_ as t}from"./layout.57285c1e.js";import{_ as s,j as a,w as r,o as n,a as e}from"./entry.58710a5b.js";const c={},_=e("div",{class:"text-center"},[e("h1",null,"Erro 403"),e("h3",null,"Você não possui permissão para acessar essa página")],-1);function i(p,l){const o=t;return n(),a(o,{name:"error"},{title:r(()=>[_]),_:1})}const f=s(c,[["render",i]]);export{f as default};
