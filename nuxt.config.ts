@@ -19,7 +19,7 @@ export default defineNuxtConfig({
     head: {
       title: 'Zefu - Site oficial',
       meta: [
-        { 'http-equiv': 'Content-Security-Policy', content: 'upgrade-insecure-requests' }
+        // { 'http-equiv': 'Content-Security-Policy', content: 'upgrade-insecure-requests' }
       ]
     }
   }
