@@ -12,6 +12,11 @@ export default defineNuxtConfig({
     plugins: {
       tailwindcss: {},
       autoprefixer: {},
+      cssnano: {
+        preset: [
+          'default', { discardComments: { removeAll: true } }
+        ]
+      }
     },
   },
   modules: ['nuxt-icon', '@pinia/nuxt'],
