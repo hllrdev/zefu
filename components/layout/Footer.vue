@@ -1,9 +1,9 @@
 <template>
     <footer class="footer footer-center p-10 bg-neutral-900 text-neutral-400">
         <div class="grid grid-flow-col gap-4">
-            <NuxtLink to="/"><span class="link link-hover">Início</span></NuxtLink>
-            <NuxtLink to="/products"><span class="link link-hover">Produtos</span></NuxtLink>
-            <NuxtLink to="/calculator"><span class="link link-hover">Calculadora</span></NuxtLink>
+            <NuxtLink to="/" no-prefetch><span class="link link-hover">Início</span></NuxtLink>
+            <NuxtLink to="/products" no-prefetch><span class="link link-hover">Produtos</span></NuxtLink>
+            <NuxtLink to="/calculator" no-prefetch><span class="link link-hover">Calculadora</span></NuxtLink>
         </div> 
         <div>
             <div class="grid grid-flow-col gap-4">

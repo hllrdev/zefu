@@ -46,7 +46,7 @@
                         <Input name="password" type="password" label="Senha" placeholder="Digite aqui sua senha" @update:model-value="formData.password = $event"/>
                         <span class="text-error font-medium text-xs" v-if="v$.password.$error">{{ v$.password.$errors[0].$message }}</span>
                         <div class="text-end pb-4 pt-1">   
-                            <NuxtLink class="text-xs" to="/auth/recovery">
+                            <NuxtLink class="text-xs" to="/auth/recovery" no-prefetch>
                                 Esqueceu sua senha?
                             </NuxtLink>
                         </div>

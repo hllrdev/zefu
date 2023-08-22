@@ -24,7 +24,7 @@
                     <p class="text-white">Olá, <span class="text-sm text-primary font-semibold">{{ nameFormatted }}</span></p>
                 </div>
                 <div v-show="!authStore.auth.authenticated">
-                    <NuxtLink to="/auth/signin">
+                    <NuxtLink to="/auth/signin" no-prefetch>
                         <button class="btn btn-secondary btn-sm text-xs px-10 text-neutral-50">Entrar</button>
                     </NuxtLink>
                 </div>

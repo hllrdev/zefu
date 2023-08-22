@@ -19,11 +19,11 @@
             </div>
         </li>
         <li v-for="item, i in items" :key="i">
-            <NuxtLink :to="item.to">{{ item.route }}</NuxtLink>
+            <NuxtLink :to="item.to" no-prefetch>{{ item.route }}</NuxtLink>
         </li>
         <li class="md:hidden mt-4">
             <div v-show="!props.authenticated">
-                <NuxtLink to="/auth/signin"> 
+                <NuxtLink to="/auth/signin" no-prefetch> 
                     <button class="btn btn-secondary text-neutral-50 btn-wide">Entrar</button>
                 </NuxtLink>
             </div>
