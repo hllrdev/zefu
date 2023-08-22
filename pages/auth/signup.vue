@@ -68,7 +68,7 @@
                 </form>
                 <p class="text-sm text-center">
                     Já possui uma conta?
-                    <NuxtLink to="/auth/signin" class="font-semibold ml-2" no-prefetch>Entrar</NuxtLink>
+                    <NuxtLink to="/auth/signin" class="font-semibold ml-2">Entrar</NuxtLink>
                 </p>
             </div>
         </template>

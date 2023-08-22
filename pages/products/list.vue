@@ -51,7 +51,7 @@
                 <div class="flex justify-center">
                     <div class="md:w-4/5 lg:w-3/5">
                         <div class="flex justify-end md:pr-6 pb-6">
-                            <NuxtLink class="btn hover:text-primary" to="/products/add" no-prefetch>
+                            <NuxtLink class="btn hover:text-primary" to="/products/add">
                                 <div class="flex items-center gap-2">
                                     Cadastrar
                                     <Icon class="w-6 h-auto" name="gridicons:add" color="white"></Icon>
@@ -74,7 +74,7 @@
                                                 title: product.title,
                                                 link: product.link,
                                                 photo: product.photo
-                                            }}" no-prefetch>
+                                            }}">
                                             <td>
                                                 <div class="flex items-center">
                                                     <div class="avatar">
@@ -96,7 +96,7 @@
                                                         link: product.link,
                                                         photo: product.photo
                                                     }
-                                                }" no-prefetch>
+                                                }">
                                                     <Icon class="cursor-pointer w-6 h-auto hover:text-primary" name="material-symbols:edit" />
                                                 </NuxtLink> 
                                                 <div @click="showDialogDeleteProduct(product.id)">

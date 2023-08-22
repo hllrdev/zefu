@@ -40,7 +40,7 @@
                 <div class="flex justify-center">
                     <div class="md:w-4/5">
                         <div v-if="authStore.hasPermission(['ADMIN','MANAGER'])" class="flex justify-end md:pr-6 pb-6">
-                            <NuxtLink to="/products/list" no-prefetch>
+                            <NuxtLink to="/products/list">
                                 <span class="btn hover:text-primary text-white">Gerenciar
                                     <Icon class="w-6 h-auto" name="material-symbols:app-registration" color="white"></Icon>
                                 </span>

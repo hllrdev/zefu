@@ -67,7 +67,7 @@
                     </div>
                     <button type="button" class="btn btn-secondary text-neutral-50 w-full" @click="submitForm">Recuperar</button>
                 </form>
-                <p class="text-sm text-center pb-4">Lembrou a senha? <NuxtLink to="/auth/signin" no-prefetch><span class="font-semibold ml-2">Entrar</span></NuxtLink></p>
+                <p class="text-sm text-center pb-4">Lembrou a senha? <NuxtLink to="/auth/signin"><span class="font-semibold ml-2">Entrar</span></NuxtLink></p>
                 <div v-show="wait" class="flex flex-col items-center">
                     <span class="loading loading-spinner loading-md mb-2"></span>
                     <p class="text-xs">Aguarde um instante</p>

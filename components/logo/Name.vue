@@ -1,6 +1,6 @@
 <template>
     <div>
-        <NuxtLink to="/" no-prefetch>
+        <NuxtLink to="/">
             <div class="text-3xl lilita">
                 ZEFU
             </div>
