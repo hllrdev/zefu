@@ -1,4 +1,5 @@
 export default defineNuxtConfig({
+  sourcemap: false,
   devtools: {
     enabled: false
   },
