@@ -1,6 +1,6 @@
 export default defineNuxtConfig({
   nitro: {
-    sourceMap: false
+    preset: "render-com"
   },
   devtools: {
     enabled: false
