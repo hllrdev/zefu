@@ -1,9 +1,4 @@
 export default defineNuxtConfig({
-  generate: {
-    exclude: [
-      /^\/.*/ // Exclui todas as rotas
-    ]
-  },
   devtools: {
     enabled: false
   },
