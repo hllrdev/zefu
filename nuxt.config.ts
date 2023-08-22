@@ -1,7 +1,4 @@
 export default defineNuxtConfig({
-  nitro: {
-    preset: "netlify-static"
-  },
   devtools: {
     enabled: false
   },
