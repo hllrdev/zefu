@@ -12,7 +12,7 @@
                 <Product v-for="product in products" :key="product.id" :link="product.link" :photo="product.photo" :title="product.title"/>
             </div>
             <div class="flex flex-grow justify-center items-end">
-                <NuxtLink to="/products" no-prefetch="">
+                <NuxtLink to="/products" no-prefetch>
                     <span class="btn my-6 md:mt-10 btn-wide">
                         Ver todos 
                         <Icon class="w-4 h-auto" name="cil:arrow-right" color="white"/>
