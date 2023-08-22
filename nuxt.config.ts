@@ -1,5 +1,7 @@
 export default defineNuxtConfig({
-  sourcemap: false,
+  nitro: {
+    preset: 'node-server'
+  },
   devtools: {
     enabled: false
   },
