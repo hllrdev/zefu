@@ -1,7 +1,4 @@
 export default defineNuxtConfig({
-  nitro: {
-    preset: "render-com"
-  },
   devtools: {
     enabled: false
   },
