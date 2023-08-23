@@ -17,10 +17,7 @@ export default defineNuxtConfig({
   modules: ['nuxt-icon', '@pinia/nuxt'],
   app: {
     head: {
-      title: 'Zefu - Site oficial',
-      meta: [
-        // { 'http-equiv': 'Content-Security-Policy', content: 'upgrade-insecure-requests' }
-      ]
+      title: 'Zefu - Site oficial'
     }
   }
 })
