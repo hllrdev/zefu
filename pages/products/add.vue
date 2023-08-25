@@ -77,7 +77,7 @@
                                 <span class="text-error font-medium text-xs" v-if="v$.link.$error">{{ v$.link.$errors[0].$message }}</span>
                             </div>
                             <label class="label">
-                                <span class="label-text text-neutral-600">Foto do produto</span>
+                                <span class="label-text text-white font-semibold">Foto do produto</span>
                             </label>
                             <div class="mt-3 md:mb-12">
                                 <label class="border py-3 px-5 cursor-pointer hover:bg-neutral-100" for="photo">Selecionar arquivo</label>

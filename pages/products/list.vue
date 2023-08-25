@@ -8,14 +8,18 @@
     const products = ref([]);
     const deleteProductId = ref(''); 
 
+    
+
     onMounted(async () => {    
-        const data = await useFetch(`${API_URL}/products`,
+        console.log('aqui')
+        await $fetch(`${API_URL}/products`,
         {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`,
             }
+        }).then((response) => {
+            products.value = response;
         });
-        products.value = data.value;
     })
 
     const showDialogDeleteProduct = (id) => {
