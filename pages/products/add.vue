@@ -86,7 +86,7 @@
                                 <input type="file" id="photo" name="photo" class="invisible" @change="changeFileInput" />
                             </div>
                             <div class="flex justify-center">
-                                <button type="button" class="btn btn-accent btn-wide" @click="submitForm">Adicionar</button>
+                                <button type="button" class="btn btn-accent text-white btn-wide" @click="submitForm">Adicionar</button>
                             </div>
                         </form>
                     </div>

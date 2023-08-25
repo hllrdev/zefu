@@ -55,7 +55,7 @@
                 <div class="flex justify-center">
                     <div class="md:w-4/5 lg:w-3/5">
                         <div class="flex justify-end md:pr-6 pb-6">
-                            <NuxtLink class="btn hover:text-primary" to="/products/add">
+                            <NuxtLink class="btn btn-accent text-white" to="/products/add">
                                 <div class="flex items-center gap-2">
                                     Cadastrar
                                     <Icon class="w-6 h-auto" name="gridicons:add" color="white"></Icon>
@@ -65,7 +65,7 @@
                         <div class="overflow-x-auto">
                             <table class="table">
                                 <thead>
-                                    <tr>
+                                    <tr class="text-white">
                                         <th>Produto</th>
                                         <th>Ações</th>
                                     </tr>
@@ -138,8 +138,8 @@
     td * {
         margin: 0.25rem;
     }
-    
-    tr th {
-        color: #000;
+
+    tr {
+        @apply border-b-neutral-content
     }
 </style>
