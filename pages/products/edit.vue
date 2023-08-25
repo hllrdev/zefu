@@ -111,7 +111,7 @@
                                 <img class="w-72" :src="imagePreview ? imagePreview  : `${API_URL}/static${initialImage}`" />
                             </div>
                             <div class="flex justify-center">
-                                <button type="button" class="btn btn-accent btn-wide" @click="submitForm">Editar</button>
+                                <button type="button" class="btn btn-accent text-white btn-wide" @click="submitForm">Editar</button>
                             </div>
                         </form>
                     </div>
