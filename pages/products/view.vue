@@ -31,7 +31,8 @@
                                 <span class="label-text text-neutral-600">Foto do produto</span>
                             </label>
                             <div class="flex justify-center pb-6 pt-2">
-                                <img class="w-72" :src="`${API_URL}/static${photo}`" />
+                                <!-- <img class="w-72" :src="`${API_URL}/static${photo}`" /> -->
+                                <img class="w-72" :src="photo" />
                             </div>
                         </form>
                     </div>

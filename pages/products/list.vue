@@ -83,7 +83,8 @@
                                                 <div class="flex items-center">
                                                     <div class="avatar">
                                                         <div class="mask mask-squircle w-12 h-12">
-                                                            <img :src="`${API_URL}/static${product.photo}`" alt="Photo product" />
+                                                            <!-- <img :src="`${API_URL}/static${product.photo}`" alt="Photo product" /> -->
+                                                            <img :src="product.photo" alt="Photo product" />
                                                         </div>
                                                     </div>
                                                     <span>{{ product.title }}</span>

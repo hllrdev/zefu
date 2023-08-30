@@ -108,7 +108,8 @@
                                 <input type="file" id="photo" name="photo" class="invisible" @change="changeFileInput" />
                             </div>
                             <div class="flex justify-center pb-6 pt-2">
-                                <img class="w-72" :src="imagePreview ? imagePreview  : `${API_URL}/static${initialImage}`" />
+                                <!-- <img class="w-72" :src="imagePreview ? imagePreview  : `${API_URL}/static${initialImage}`" /> -->
+                                <img class="w-72" :src="imagePreview ? imagePreview  : initialImage" />
                             </div>
                             <div class="flex justify-center">
                                 <button type="button" class="btn btn-accent text-white btn-wide" @click="submitForm">Editar</button>
