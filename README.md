@@ -6,22 +6,22 @@ Para facilitar a adição de produtos, também há uma página direcionada para 
 
 ### Início
 
-<img width="100%" alt="Heuller-Zefu-Home-Desktop" src="https://drive.google.com/uc?export=view&id=1sWyq_RAolP2ws1_-pGL-BgOveBvwfFUT" />
-<img width="350em" alt="Heuller-Zefu-Home-Mobile" src="https://drive.google.com/uc?export=view&id=17laC1xTd-zyL8tZZE-wADDyqG4Y4x6fU" />
+<img width="100%" alt="Heuller-Zefu-Home-Desktop" src="./readme/1.png" />
+<img width="350em" alt="Heuller-Zefu-Home-Mobile" src="./readme/2.png" />
 
 ### Autenticação
-<img width="350em" alt="Heuller-Zefu-Authenticacao" src="https://drive.google.com/uc?export=view&id=1r5Xb2RRXwcE97wg1N9xTDXtgLffIwenH" />
+<img width="350em" alt="Heuller-Zefu-Authenticacao" src="./readme/3.png"  />
 
 ### Calculadora
 <div style="display: inline-block;">
-  <img width="100%" alt="Heuller-Zefu-Calculadora" src="https://drive.google.com/uc?export=view&id=1CXEyvBVuvnMBzbihh5rEKGwHoP-3_CpB" />
-  <img width="350em" alt="Heuller-Zefu-Macronutrientes" src="https://drive.google.com/uc?export=view&id=1gxmzKI-Oo5hOnG-E2NO3yfd2mKp3ZJJX" />
+  <img width="100%" alt="Heuller-Zefu-Calculadora" src="./readme/4.png"  />
+  <img width="350em" alt="Heuller-Zefu-Macronutrientes" src="./readme/5.png"  />
 </div>
 
 ### Produtos
 <div style="display:inline-block">
-  <img width="350em" alt="Heuller-Zefu-Produtos" src="https://drive.google.com/uc?export=view&id=18UnR8eXYptZdWcNSrPQJQ0SIaSr5RJlh" />
-  <img width="350em" alt="Heuller-Zefu-Adicionar" src="https://drive.google.com/uc?export=view&id=1_E4AHZe2LMvF4wFUjFC4vdM1ljOYprko" />
+  <img width="350em" alt="Heuller-Zefu-Produtos" src="./readme/6.png"  />
+  <img width="350em" alt="Heuller-Zefu-Adicionar" src="./readme/7.png" />
 </div>
 
 
