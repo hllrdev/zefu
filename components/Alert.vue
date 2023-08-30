@@ -39,7 +39,7 @@
                 </div>
                 <Icon class="w-8 h-auto" :name="appStore.alert.icon" />
                 <span>{{ appStore.alert.message }}</span>
-                <progress class="progress absolute bottom-1 left-0" :value="progress" max="100"></progress>
+                <progress class="progress progress-secondary absolute bottom-1 left-0" :value="progress" max="100"></progress>
             </div>
         </div>
     </div>
