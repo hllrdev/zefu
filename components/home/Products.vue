@@ -1,16 +1,16 @@
 <script setup>
     const runtimeConfig = useRuntimeConfig();
     const API_URL = runtimeConfig.public.API_URL;
-    const products = ref([]);
-    products.value = await useFetch( `${API_URL}/products/main`);
+    const {data:products, pending:awaitProducts} = await useFetch( `${API_URL}/products/main`);
 </script>
 
 <template>
     <div id="products" class="bg-secondary md:flex md:justify-center">
         <div class="md:w-11/12 lg:w-4/5 py-10 px-4 md:px-0 grid">
             <h2 class="text-white text-center pb-6 md:pb-10">Produtos</h2>
+            {{ products }}
             <div>
-                <div v-if="!products.length" class="flex justify-center">
+                <div v-if="awaitProducts" class="flex justify-center">
                     <span class="loading loading-dots loading-lg"></span>
                 </div>
                 <div v-else>
