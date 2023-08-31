@@ -3,6 +3,7 @@ import { useAuthStore } from "~/store/authStore";
 export default defineNuxtRouteMiddleware(async (to, from) => {
 
     if (process.server) return
+    // if (process.server || process.client) return
 
     if (process.client) {
         const runtimeConfig = useRuntimeConfig();

@@ -10,7 +10,8 @@
         placeholder: {type: String,required: true},
         value: {type: String,required: false},
         disabled: {type: Boolean,required: false},
-        size: {type: String, required: false}
+        size: {type: String, required: false},
+        maxlength: {type: String, required: false}
     })
 </script>
 
@@ -19,7 +20,7 @@
         <label class="label">
             <span class="label-text text-white font-semibold">{{ props.label }}</span>
         </label>
-        <input :value="props.value" :name="props.name" :type="props.type" :placeholder="props.placeholder" :disabled="props.disabled"
+        <input :maxlength="props.maxlength" :value="props.value" :name="props.name" :type="props.type" :placeholder="props.placeholder" :disabled="props.disabled"
             @input="$emit('update:modelValue', $event.target.value)"
             class="input  placeholder:text-sm border border-neutral-300
              text-neutral-content focus:outline-none focus:border-secondary disabled:bg-neutral-50 disabled:border-neutral-100 disabled:text-neutral-400" />
