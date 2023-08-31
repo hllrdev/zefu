@@ -8,7 +8,6 @@
     <div id="products" class="bg-secondary md:flex md:justify-center">
         <div class="md:w-11/12 lg:w-4/5 py-10 px-4 md:px-0 grid">
             <h2 class="text-white text-center pb-6 md:pb-10">Produtos</h2>
-            {{ products }}
             <div>
                 <div v-if="awaitProducts" class="flex justify-center">
                     <span class="loading loading-dots loading-lg"></span>
