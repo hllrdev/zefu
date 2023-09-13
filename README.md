@@ -14,7 +14,7 @@ Para facilitar a adição de produtos, também há uma página direcionada para 
 </div>
 
 #### Link
-https://client-zefu.onrender.com
+https://zefu.com.br
 
 #### API
 https://github.com/hllrdev/api-zefu
