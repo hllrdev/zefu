@@ -13,9 +13,6 @@ Para facilitar a adição de produtos, também há uma página direcionada para 
   <img width="350em" alt="Heuller-Zefu-Adicionar" src="./readme/7.png" />
 </div>
 
-#### Link
-https://zefu.com.br
-
 #### API
 https://github.com/hllrdev/api-zefu
 
